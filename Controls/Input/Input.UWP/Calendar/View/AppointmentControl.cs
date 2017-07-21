@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents the custom <see cref="AppointmentControl"/> implementation used to visualize the UI of the appointments in a cell.
     /// </summary>
-    public class AppointmentControl : RadContentControl
+    public partial class AppointmentControl : RadContentControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AppointmentControl"/> class.

@@ -83,10 +83,11 @@ namespace Telerik.UI.Xaml.Controls.Input.Calendar
             {
                 foreach (Setter setter in style.Setters)
                 {
-                    if (setter.Property == Border.BorderThicknessProperty)
-                    {
-                        return true;
-                    }
+					// TODO UNO
+                    //if (setter.Property == Border.BorderThicknessProperty)
+                    //{
+                    //    return true;
+                    //}
                 }
             }
 

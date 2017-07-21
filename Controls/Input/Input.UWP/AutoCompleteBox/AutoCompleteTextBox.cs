@@ -10,7 +10,7 @@ namespace Telerik.UI.Xaml.Controls.Input.AutoCompleteBox
     /// Represents the TextBox part of the RadAutoCompleteBox. Exposed for easier styling via implicit style.
     /// </summary>
     [TemplatePart(Name = "PART_DeleteButton", Type = typeof(Button))]
-    public class AutoCompleteTextBox : TextBox
+    public partial class AutoCompleteTextBox : TextBox
     {
         private const string DeleteButtonPartName = "PART_DeleteButton";
         private Button deleteButton;
