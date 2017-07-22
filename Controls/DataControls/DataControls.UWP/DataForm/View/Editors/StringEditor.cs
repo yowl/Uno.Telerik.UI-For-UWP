@@ -8,7 +8,7 @@ namespace Telerik.UI.Xaml.Controls.Data
     /// <summary>
     /// Represents a StringEditor control.
     /// </summary>
-    public class StringEditor : TextBox, ITypeEditor
+    public partial class StringEditor : TextBox, ITypeEditor
     {
         /// <summary>
         /// Identifies the <see cref="LabelIconStyle"/> dependency property. 

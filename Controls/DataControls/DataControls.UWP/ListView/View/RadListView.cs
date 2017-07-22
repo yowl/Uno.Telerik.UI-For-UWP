@@ -1140,8 +1140,9 @@ namespace Telerik.UI.Xaml.Controls.Data
         ///  Undoes the effects of the PrepareContainerForItem method.
         /// </summary>
         protected internal virtual void ClearContainerForItem(RadListViewItem item)
-        {
-            item.ClearValue(FrameworkElement.DataContextProperty);
+		{ 
+			// UNO TODO
+			// item.ClearValue(FrameworkElement.DataContextProperty);
         }
 
         /// <summary>
@@ -1149,13 +1150,14 @@ namespace Telerik.UI.Xaml.Controls.Data
         /// </summary>
         protected internal virtual void ClearContainerForGroupHeader(ListViewGroupHeader item)
         {
-            item.ClearValue(FrameworkElement.DataContextProperty);
-        }
-        
-        /// <summary>
-        /// Prepare the element to act as the ItemUI for the corresponding group header.
-        /// </summary>
-        protected internal virtual void PrepareContainerForGroupHeader(ListViewGroupHeader groupHeader, GroupHeaderContext context)
+			// UNO TODO
+			// item.ClearValue(FrameworkElement.DataContextProperty);
+		}
+
+		/// <summary>
+		/// Prepare the element to act as the ItemUI for the corresponding group header.
+		/// </summary>
+		protected internal virtual void PrepareContainerForGroupHeader(ListViewGroupHeader groupHeader, GroupHeaderContext context)
         {
             groupHeader.DataContext = context;
 

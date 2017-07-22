@@ -9,7 +9,7 @@ namespace Telerik.UI.Xaml.Controls.Data
     /// <summary>
     /// Represents a ToggleSwitchCustomEditor control.
     /// </summary>
-    public class ToggleSwitchCustomEditor : CustomEditorBase<ToggleSwitch>
+    public partial class ToggleSwitchCustomEditor : CustomEditorBase<ToggleSwitch>
     {
         /// <summary>
         /// Identifies the <see cref="SelectedBackgroundBrush"/> dependency property. 
