@@ -25,7 +25,7 @@ namespace Telerik.UI.Xaml.Controls.Grid
             {
                 if (defaultCellEditorStyle == null)
                 {
-                    defaultCellEditorStyle = ResourceHelper.LoadEmbeddedResource(
+                    defaultCellEditorStyle = /* UNO TODO */Controls.Primitives.ResourceHelper.LoadEmbeddedResource(
                         typeof(DataGridTextColumn),
                         "Telerik.UI.Xaml.Controls.Grid.View.Columns.Resources.DefaultDateColumnEditorStyle.xaml",
                         "DefaultColumnEditorStyle") as Style;

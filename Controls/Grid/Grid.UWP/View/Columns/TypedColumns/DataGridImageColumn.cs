@@ -73,16 +73,17 @@ namespace Telerik.UI.Xaml.Controls.Grid
         {
             var size = base.MeasureCellContainer(availableWidth, container);
 
-            var image = container as Image;
-            if (image != null)
-            {
-                var bitmapImage = image.Source as BitmapImage;
-                if (bitmapImage != null && bitmapImage.PixelWidth > 0)
-                {
-                    size.Width = bitmapImage.PixelWidth;
-                    size.Height = bitmapImage.PixelHeight;
-                }
-            }
+			// UNO TODO
+            // var image = container as Image;
+            // if (image != null)
+            // {
+            //     var bitmapImage = image.Source as BitmapImage;
+            //     if (bitmapImage != null && bitmapImage.PixelWidth > 0)
+            //     {
+            //         size.Width = bitmapImage.PixelWidth;
+            //         size.Height = bitmapImage.PixelHeight;
+            //     }
+            // }
 
             return size;
         }
@@ -151,7 +152,9 @@ namespace Telerik.UI.Xaml.Controls.Grid
 
         internal override FrameworkElement CreateEditorContentVisual()
         {
-            return new Image();
+			// UNO TODO
+			// return new Image();
+			throw new NotSupportedException();
         }
 
         internal override void PrepareEditorContentVisual(FrameworkElement editorContent, Windows.UI.Xaml.Data.Binding binding)
