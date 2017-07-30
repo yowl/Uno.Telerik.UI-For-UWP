@@ -62,29 +62,33 @@ namespace Telerik.UI.Xaml.Controls.Grid
         {
             get
             {
-                if (defaultTextCellStyle == null)
-                {
-                    defaultTextCellStyle = /* UNO TODO */Controls.Primitives.ResourceHelper.LoadEmbeddedResource(
-                        typeof(DataGridTextColumn),
-                        "Telerik.UI.Xaml.Controls.Grid.View.Columns.Resources.DefaultTextColumnStyle.xaml",
-                        "DefaultColumnStyle") as Style;
-                }
-                return defaultTextCellStyle;
-            }
-        }
+				// UNO TODO
+				//if (defaultTextCellStyle == null)
+				//{
+				//    defaultTextCellStyle = /* UNO TODO */Controls.Primitives.ResourceHelper.LoadEmbeddedResource(
+				//        typeof(DataGridTextColumn),
+				//        "Telerik.UI.Xaml.Controls.Grid.View.Columns.Resources.DefaultTextColumnStyle.xaml",
+				//        "DefaultColumnStyle") as Style;
+				//}
+				//return defaultTextCellStyle;
+				return null;
+			}
+		}
 
         internal override Style DefaultCellFlyoutContentStyle
         {
             get
             {
-                if (defaultCellFlyoutContentStyle == null)
-                {
-                    defaultCellFlyoutContentStyle = /* UNO TODO */Controls.Primitives.ResourceHelper.LoadEmbeddedResource(
-                        typeof(DataGridTextColumn),
-                        "Telerik.UI.Xaml.Controls.Grid.View.Columns.Resources.DefaultTextColumnFlyoutContentStyle.xaml",
-                        "DefaultColumnFlyoutStyle") as Style;
-                }
-                return defaultCellFlyoutContentStyle;
+				// UNO TODO
+				//if (defaultCellFlyoutContentStyle == null)
+				//{
+				//    defaultCellFlyoutContentStyle = /* UNO TODO */Controls.Primitives.ResourceHelper.LoadEmbeddedResource(
+				//        typeof(DataGridTextColumn),
+				//        "Telerik.UI.Xaml.Controls.Grid.View.Columns.Resources.DefaultTextColumnFlyoutContentStyle.xaml",
+				//        "DefaultColumnFlyoutStyle") as Style;
+				//}
+				//return defaultCellFlyoutContentStyle;
+				return null;
             }
         }
 
