@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Telerik.UI.Xaml.Controls.Grid.Primitives
 {
-    public class DataGridRowDetailsControl: RadContentControl
+    public partial class DataGridRowDetailsControl: RadContentControl
     {
         public DataGridRowDetailsControl()
         {
