@@ -95,12 +95,32 @@
       <Version>1.1.1</Version>
     </PackageReference>
     <PackageReference Include="Uno.UI">
-      <Version>1.24.1-dev.1526</Version>
+      <Version>1.24.1-dev.1637</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <None Include="Info.plist" />
+    <BundleResource Include="Assets\Fonts\segmdl2.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Assets\Fonts\seguisym.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Assets\Fonts\segoeui.ttf" />
+    <BundleResource Include="Assets\Fonts\segoeuib.ttf" />
+    <BundleResource Include="Assets\Fonts\segoeuii.ttf" />
+    <BundleResource Include="Assets\Fonts\segoeuil.ttf" />
+    <BundleResource Include="Assets\Fonts\segoeuisl.ttf" />
+    <BundleResource Include="Assets\Fonts\segoeuiz.ttf" />
+    <BundleResource Include="Assets\Fonts\seguibl.ttf" />
+    <BundleResource Include="Assets\Fonts\seguibli.ttf" />
+    <BundleResource Include="Assets\Fonts\seguili.ttf" />
+    <BundleResource Include="Assets\Fonts\seguisb.ttf" />
+    <BundleResource Include="Assets\Fonts\seguisbi.ttf" />
+    <BundleResource Include="Assets\Fonts\seguisli.ttf" />
+    <None Include="Info.plist">
+      <SubType>Designer</SubType>
+    </None>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <InterfaceDefinition Include="Resources\LaunchScreen.xib" />
     <Content Include="Entitlements.plist" />

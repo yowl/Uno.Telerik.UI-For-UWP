@@ -18,6 +18,7 @@
     xmlns:theming="using:Telerik.UI.Xaml.Controls">
 
     <ResourceDictionary.ThemeDictionaries>
+        <!-- UNO TODO
         <ResourceDictionary x:Key="Default">
             <theming:UserThemeResources x:Key="ResourceLoaderInitializer"/>
             <ResourceDictionary.MergedDictionaries>
@@ -25,7 +26,7 @@
                 <ResourceDictionary Source="{CustomResource DarkResourcesPath}"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-        <ResourceDictionary x:Key="Light">
+		<ResourceDictionary x:Key="Light">
             <theming:UserThemeResources x:Key="ResourceLoaderInitializer"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Controls.Data.UWP/Themes/ThemeResourcesLight.xaml"/>
@@ -38,7 +39,7 @@
                 <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Controls.Data.UWP/Themes/ThemeResourcesHighContrast.xaml"/>
                 <ResourceDictionary Source="{CustomResource HighContrastResourcesPath}"/>
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        </ResourceDictionary>-->
     </ResourceDictionary.ThemeDictionaries>
 
     <ResourceDictionary.MergedDictionaries>

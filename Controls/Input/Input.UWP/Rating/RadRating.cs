@@ -464,7 +464,8 @@ namespace Telerik.UI.Xaml.Controls.Input
             int index = this.GetIndexOf(ratingItem);
             if (index == -1)
             {
-                Debug.Assert(false, "Unknown item");
+				// UNO TODO
+				System.Diagnostics.Debug.Assert(false, "Unknown item");
                 return;
             }
 
@@ -1258,12 +1259,11 @@ namespace Telerik.UI.Xaml.Controls.Input
                 var ratingItem = this.Items.ElementAtOrDefault((int)newValue - 1) as RadRatingItem;
                 if (ratingItem != null)
                 {
-					// UNO TODO
-					//var ratingItemPeer = FrameworkElementAutomationPeer.FromElement(ratingItem);
-					//if (ratingItemPeer != null)
-					//{
-					//    ratingItemPeer.RaiseAutomationEvent(AutomationEvents.AutomationFocusChanged);
-					//}
+					var ratingItemPeer = FrameworkElementAutomationPeer.FromElement(ratingItem);
+					if (ratingItemPeer != null)
+					{
+						ratingItemPeer.RaiseAutomationEvent(AutomationEvents.AutomationFocusChanged);
+					}
 				}
 			}
         }
