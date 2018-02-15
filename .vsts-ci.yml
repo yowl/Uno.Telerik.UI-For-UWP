@@ -12,7 +12,7 @@ phases:
   queue:
     name: Default
     demands:
-    - Xamarin -equals 4.8.0.752
+    - VS15.5.5
 
   steps:
 
@@ -40,7 +40,7 @@ phases:
       msbuildLocationMethod: version
       msbuildVersion: latest
       msbuildArchitecture: x86
-      msbuildArguments: /p:Configuration=Release "/p:Platform=Any CPU" /detailedsummary
+      msbuildArguments: /p:Configuration=Release "/p:Platform=Any CPU" /detailedsummary "/p:PackageVersion=$(GITVERSION.FullSemVer)" "/p:InformationalVersion=$(GITVERSION.InformationalVersion)" "/p:PackageOutputPath=$(build.artifactstagingdirectory)"
       clean: false
       maximumCpuCount: true
       restoreNugetPackages: false
@@ -51,6 +51,12 @@ phases:
     inputs:
       SourceFolder: $(Build.SourcesDirectory)\SDKExamples.iOS\bin
       Contents: $(Build.SourcesDirectory)\SDKExamples.iOS\bin\**\*.ipa
+      TargetFolder: $(build.artifactstagingdirectory)
+
+  - task: CopyFiles@2
+    inputs:
+      SourceFolder: $(Build.SourcesDirectory)\SDKExamples.Droid\bin
+      Contents: $(Build.SourcesDirectory)\SDKExamples.Droid\bin\**\*.apk
       TargetFolder: $(build.artifactstagingdirectory)
 
   - task: PublishBuildArtifacts@1
