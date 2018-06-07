@@ -13,7 +13,7 @@ namespace Telerik.UI.Xaml.Controls.Grid.Primitives
     public partial class DataGridColumnHeader : IDragDropElement, IReorderItem
     {
         private int logicalIndex;
-        private ReorderItemsCoordinator reorderCoordinator;
+        private IReorderItemsCoordinator reorderCoordinator;
         private bool skipHitTest;
 
         DependencyObject IReorderItem.Visual
@@ -49,7 +49,7 @@ namespace Telerik.UI.Xaml.Controls.Grid.Primitives
             }
         }
 
-        ReorderItemsCoordinator IReorderItem.Coordinator
+        IReorderItemsCoordinator IReorderItem.Coordinator
         {
             get
             {

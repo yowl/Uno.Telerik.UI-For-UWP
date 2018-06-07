@@ -9,7 +9,7 @@ namespace Telerik.UI.Xaml.Controls.Data.ListView
 {
     public partial class RadListViewItem : IReorderItem
     {
-        private ReorderItemsCoordinator reorderCoordinator;
+        private IReorderItemsCoordinator reorderCoordinator;
         private int logicalIndex;
         private bool isHandleEnabled;
 
@@ -82,7 +82,7 @@ namespace Telerik.UI.Xaml.Controls.Data.ListView
             get { return this.RenderSize; }
         }
 
-        ReorderItemsCoordinator IReorderItem.Coordinator
+        IReorderItemsCoordinator IReorderItem.Coordinator
         {
             get
             {
@@ -113,7 +113,21 @@ namespace Telerik.UI.Xaml.Controls.Data.ListView
 
             (dragVisual as IDragDropElement).SkipHitTest = true;
 
-            DragDrop.SetDragPositionMode(this, this.ListView.Orientation == Orientation.Vertical ? DragPositionMode.RailY : DragPositionMode.RailX);
+            var dragPositionMode = DragPositionMode.Free;
+
+            if (this.ListView.LayoutDefinition is StackLayoutDefinition)
+            {
+                if (this.ListView.Orientation == Orientation.Vertical)
+                {
+                    dragPositionMode = DragPositionMode.RailY;
+                }
+                else
+                {
+                    dragPositionMode = DragPositionMode.RailX;
+                }
+            }
+
+            DragDrop.SetDragPositionMode(this, dragPositionMode);
 
             this.Opacity = 0.0;
 
@@ -136,11 +150,16 @@ namespace Telerik.UI.Xaml.Controls.Data.ListView
                 {
                     this.ListView.DragBehavior.OnDragDropCompleted(this, context.DragSuccessful);
 
-                    var itemReordered = context.DragSuccessful;
-
-                    if (!itemReordered && this.reorderCoordinator != null)
+                    if (this.reorderCoordinator != null)
                     {
-                        this.reorderCoordinator.CancelReorderOperation(this, data.InitialSourceIndex);
+                        if (context.DragSuccessful)
+                        {
+                            this.reorderCoordinator.CommitReorderOperation(data.InitialSourceIndex, data.CurrentSourceReorderIndex);
+                        }
+                        else
+                        {
+                            this.reorderCoordinator.CancelReorderOperation(this, data.InitialSourceIndex);
+                        }
                     }
                 }
             }

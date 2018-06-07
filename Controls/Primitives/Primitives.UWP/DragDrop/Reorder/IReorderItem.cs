@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Foundation;
+﻿using Windows.Foundation;
 using Windows.UI.Xaml;
 
 namespace Telerik.UI.Xaml.Controls.Primitives.DragDrop.Reorder
@@ -14,6 +9,6 @@ namespace Telerik.UI.Xaml.Controls.Primitives.DragDrop.Reorder
         int LogicalIndex { get; set; }
         Point ArrangePosition { get; set; }
         Size ActualSize { get; }
-        ReorderItemsCoordinator Coordinator { get; set; }
+        IReorderItemsCoordinator Coordinator { get; set; }
     }
 }

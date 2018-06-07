@@ -11,7 +11,7 @@ namespace Telerik.UI.Xaml.Controls.Grid.Primitives
     public partial class DataGridFlyoutHeader : IDragDropElement, IReorderItem
     {
         private bool skipHitTest;
-        private ReorderItemsCoordinator reorderCoordinator;
+        private IReorderItemsCoordinator reorderCoordinator;
         private int logicalIndex;
 
         internal event EventHandler<DragSurfaceRequestedEventArgs> DragSurfaceRequested;
@@ -28,7 +28,7 @@ namespace Telerik.UI.Xaml.Controls.Grid.Primitives
             }
         }
 
-        ReorderItemsCoordinator IReorderItem.Coordinator
+        IReorderItemsCoordinator IReorderItem.Coordinator
         {
             get
             {

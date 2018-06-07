@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Animation;
 
 namespace Telerik.UI.Xaml.Controls.Primitives.DragDrop.Reorder
 {
-    internal class ReorderItemsCoordinator
+    internal class ReorderItemsCoordinator : IReorderItemsCoordinator
     {
         private static readonly Duration DefaultAnimationDuration = new Duration(TimeSpan.FromSeconds(0.1));
 
@@ -25,13 +22,13 @@ namespace Telerik.UI.Xaml.Controls.Primitives.DragDrop.Reorder
 
         internal bool ReorderWithAnimation { get; set; }
 
-        internal IReorderItemsHost Host
+        public IReorderItemsHost Host
         {
             get;
             private set;
         }
 
-        internal int ReorderItem(int sourceIndex, IReorderItem destinationItem)
+        public int ReorderItem(int sourceIndex, IReorderItem destinationItem)
         {
             var sourceItem = this.Host.ElementAt(sourceIndex);
 
@@ -40,7 +37,7 @@ namespace Telerik.UI.Xaml.Controls.Primitives.DragDrop.Reorder
             return sourceItem.LogicalIndex;
         }
 
-        internal void CommitReorderOperation(int sourceIndex, int destinationIndex)
+        public void CommitReorderOperation(int sourceIndex, int destinationIndex)
         {
             if (sourceIndex != destinationIndex)
             {
@@ -56,7 +53,7 @@ namespace Telerik.UI.Xaml.Controls.Primitives.DragDrop.Reorder
             }
         }
 
-        internal void CancelReorderOperation(IReorderItem sourceItem, int initialSourceIndex)
+        public void CancelReorderOperation(IReorderItem sourceItem, int initialSourceIndex)
         {
             var destinationItem = this.Host.ElementAt(initialSourceIndex);
 
