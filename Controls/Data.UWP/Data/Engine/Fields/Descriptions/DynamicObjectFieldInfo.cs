@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
+
+#if !NETSTANDARD2_0
 using Microsoft.CSharp.RuntimeBinder;
+#endif
 
 namespace Telerik.Data.Core.Fields
 {
@@ -48,6 +51,7 @@ namespace Telerik.Data.Core.Fields
 
         public object GetValue(object item)
         {
+#if !NETSTANDARD2_0
             DynamicObject dynamicObject = item as DynamicObject;
             if (dynamicObject != null)
             {
@@ -67,6 +71,7 @@ namespace Telerik.Data.Core.Fields
 
                 return value;
             }
+#endif
 
             return null;
         }
