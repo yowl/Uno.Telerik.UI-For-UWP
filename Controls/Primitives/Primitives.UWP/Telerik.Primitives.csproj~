@@ -18,16 +18,11 @@
 		<DefineConstants>__WASM__</DefineConstants>
 	</PropertyGroup>
 
-		<ItemGroup>
+	<ItemGroup>
     <None Remove="Themes\SharedResources.xaml" />
-    <None Remove="Themes\ThemeColorsDark.xaml" />
-    <None Remove="Themes\ThemeColorsHighContrast.xaml" />
     <None Remove="Themes\ThemeColorsLight.xaml" />
-    <None Remove="Themes\ThemeResourcesDark.xaml" />
-    <None Remove="Themes\ThemeResourcesHighContrast.xaml" />
     <None Remove="Themes\ThemeResourcesLight.xaml" />
   </ItemGroup>
-
 
   <ItemGroup>
 		<EmbeddedResource Include="BusyIndicator\Animations\*.xaml" />
@@ -35,7 +30,7 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="1.43.0-dev.850" />
+    <PackageReference Include="Uno.UI" Version="1.43.0-dev.717" />
   </ItemGroup>
 
   <ItemGroup>

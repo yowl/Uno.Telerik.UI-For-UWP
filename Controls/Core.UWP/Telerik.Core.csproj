@@ -1,24 +1,21 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.46">
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;uap10.0.16299</TargetFrameworks>
+    <TargetFrameworks>uap10.0;netstandard2.0</TargetFrameworks>
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <DefaultLanguage>en-US</DefaultLanguage>
-    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-    <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
-  </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid80' or '$(TargetFramework)'=='netstandard2.0'">
-    <PackageReference Include="Uno.UI" Version="1.40.0-dev.376" />
+  <Import Project="..\CrossTargetting.props" />
+  
+  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == 'MonoAndroid' or  '$(TargetFrameworkIdentifier)' == 'Xamarin.iOS' ">
+    <PackageReference Include="Uno.UI">
+      <Version>1.43.0-dev.717</Version>
+    </PackageReference>
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
-
-  <PropertyGroup Condition="'$(TargetFrameworkIdentifier)' == 'uap10.0.16299'">
-    <DefineConstants>$(DefineConstants);UAP10</DefineConstants>
-  </PropertyGroup>
-
+  
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
-    <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
     <PackageReference Include="Uno.UI" Version="1.43.0-dev.850" />
   </ItemGroup>
+
 </Project>

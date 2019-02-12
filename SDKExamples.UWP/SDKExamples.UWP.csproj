@@ -11,8 +11,8 @@
     <AssemblyName>SDKExamples.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -22,7 +22,6 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <PackageCertificateThumbprint>C07C70A93EF57F3D1C12C8F006E2C0BC58F233B7</PackageCertificateThumbprint>
-    <RuntimeIdentifiers>win10-arm;win10-arm-aot;win10-x86;win10-x86-aot;win10-x64;win10-x64-aot</RuntimeIdentifiers>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -111,20 +110,7 @@
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.ApplicationInsights">
-      <Version>1.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.ApplicationInsights.PersistenceChannel">
-      <Version>1.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.ApplicationInsights.WindowsApps">
-      <Version>1.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.8</Version>
-    </PackageReference>
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Controls\Chart\Chart.UWP\Telerik.Chart.csproj">
       <Project>{b1a0d416-9566-45cc-aa38-41908d28ce56}</Project>
@@ -159,12 +145,23 @@
       <Name>Telerik.Primitives</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights" Version="1.0.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.PersistenceChannel" Version="1.0.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.WindowsApps" Version="1.0.0" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.12" />
+  </ItemGroup>
   <Import Project="..\SDKExamples.Shared\SDKExamples.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <Import Project="$(XamlSpyInstallPath)MSBuild\FirstFloor.XamlSpy.WinRT.targets" Condition="'$(XamlSpyInstallPath)' != '' and '$(Configuration)' == 'DEBUG'" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties project_1json__JsonSchema="http://json.schemastore.org/package.manifest" />
+    </VisualStudio>
+  </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
