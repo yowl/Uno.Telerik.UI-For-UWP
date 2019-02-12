@@ -93,7 +93,7 @@
     <telerik:UserThemeResources x:Key="ResourceLoaderInitializer"/>
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Primitives.UWP/Themes/ThemeColorsHighContrast.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Telerik.Primitives/Themes/ThemeColorsHighContrast.xaml"/>
         <ResourceDictionary Source="{CustomResource HighContrastResourcesPath}"/>
     </ResourceDictionary.MergedDictionaries>
 

@@ -1,22 +1,29 @@
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.46">
   <PropertyGroup>
-    <TargetFrameworks>uap10.0;xamarinios10;MonoAndroid71</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;uap10.0.16299</TargetFrameworks>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <DefaultLanguage>en-US</DefaultLanguage>
+  <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
-
-  <Import Project="..\..\CrossTargetting.props" />
-
-  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == 'MonoAndroid' or  '$(TargetFrameworkIdentifier)' == 'Xamarin.iOS' ">
-    <PackageReference Include="Uno.UI">
-			<Version>1.31.0-dev.193</Version>
-		</PackageReference>
-    <Reference Include="Microsoft.CSharp" />
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DefineConstants>TRACE;</DefineConstants>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid80' or '$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="Uno.UI" Version="1.40.0-dev.376" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Themes\HubTilePalette.xaml" />
     <None Remove="Themes\SharedResources.xaml" />
+    <None Remove="Themes\ThemeColorsDark.xaml" />
+    <None Remove="Themes\ThemeColorsHighContrast.xaml" />
     <None Remove="Themes\ThemeColorsLight.xaml" />
+    <None Remove="Themes\ThemeResourcesDark.xaml" />
+    <None Remove="Themes\ThemeResourcesHighContrast.xaml" />
     <None Remove="Themes\ThemeResourcesLight.xaml" />
   </ItemGroup>
 
@@ -26,19 +33,24 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="1.31.0-dev.193" />
+    <PackageReference Include="Uno.UI" Version="1.43.0-dev.850" />
+
   </ItemGroup>
 
   <ItemGroup>
     <Page Include="Themes\Generic.xaml" />
+    <Page Include="Themes\HubTilePalette.xaml" />
     <Page Include="Themes\Resources.xaml" />
     <Page Include="Themes\SharedResources.xaml" />
-    <Page Include="Themes\ThemeColorsLight.xaml" />
-    <Page Include="Themes\ThemeResourcesLight.xaml" />
+    <Page Include="Themes\ThemeColorsLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ThemeResourcesLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core.UWP\Telerik.Core.csproj" />
   </ItemGroup>
-
 </Project>

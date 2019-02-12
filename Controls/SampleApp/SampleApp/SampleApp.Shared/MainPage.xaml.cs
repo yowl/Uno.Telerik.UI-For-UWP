@@ -23,8 +23,15 @@ namespace SampleApp
     public sealed partial class MainPage : Page
     {
         public MainPage()
-        { 
-            this.InitializeComponent();
+        {
+            try
+            {
+                this.InitializeComponent();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

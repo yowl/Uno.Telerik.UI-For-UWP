@@ -21,7 +21,7 @@ namespace Telerik.UI.Xaml.Controls.Primitives
 #if WINDOWS_PHONE_APP || WINDOWS_APP
             this.DefaultResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Telerik.UI.Xaml.Primitives/Neutral");
 #else
-            this.DefaultResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Telerik.UI.Xaml.Primitives.UWP/Neutral");
+            this.DefaultResourceMap = ResourceManager.Current.MainResourceMap.GetSubtree("Telerik.Primitives/Neutral");
 #endif
         }
 

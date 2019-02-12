@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
 using Microsoft.CSharp.RuntimeBinder;
-
 namespace Telerik.Core.Data
 {
     /// <summary>

@@ -1,11 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="MSBuild.Sdk.Extras/1.5.4">
 	<PropertyGroup>
-		<TargetFrameworks>uap10.0;xamarinios10;MonoAndroid71</TargetFrameworks>
+		<TargetFrameworks>uap10.0.16299</TargetFrameworks>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
 		<DefaultLanguage>en-US</DefaultLanguage>
-	</PropertyGroup>
-
-	<Import Project="..\CrossTargetting.props" />
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+  </PropertyGroup>
 
 	<ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == 'MonoAndroid' or  '$(TargetFrameworkIdentifier)' == 'Xamarin.iOS' ">
 		<PackageReference Include="Uno.UI">
@@ -15,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Uno.UI" Version="1.31.0-dev.193" />
+	  <PackageReference Include="Uno.UI" Version="1.43.0-dev.850" />
 	</ItemGroup>
 
 	<ItemGroup>

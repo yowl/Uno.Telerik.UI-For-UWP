@@ -36,7 +36,7 @@
     <telerik:UserThemeResources x:Key="ResourceLoaderInitializer"/>
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Primitives.UWP/Themes/ThemeColorsLight.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Telerik.Primitives/Themes/ThemeColorsLight.xaml"/>
         <ResourceDictionary Source="{CustomResource LightResourcesPath}"/>
     </ResourceDictionary.MergedDictionaries>
 

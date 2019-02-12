@@ -1,0 +1,22 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.0">
+  <PropertyGroup>
+    <TargetFrameworks>uap10.0.16299</TargetFrameworks>
+    <DefaultLanguage>en-US</DefaultLanguage>
+  </PropertyGroup>
+  
+  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == 'MonoAndroid' or  '$(TargetFrameworkIdentifier)' == 'Xamarin.iOS' ">
+    <PackageReference Include="Uno.UI">
+      <Version>1.31.0-dev.193</Version>
+    </PackageReference>
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Uno.SourceGenerationTasks" Version="1.23.0-dev.62" />
+    <PackageReference Include="Uno.UI" Version="1.31.0-dev.193" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.16299' ">
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform " Version="6.0.8" />
+  </ItemGroup>
+</Project>

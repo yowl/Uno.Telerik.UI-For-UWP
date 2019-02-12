@@ -11,28 +11,28 @@
     >
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Input.UWP/Themes/CommonResources.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Telerik.Input/Themes/CommonResources.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Default">
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Input.UWP/Themes/ThemeResourcesDark.xaml"/>
+            <!--<ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Telerik.Input/Themes/ThemeResourcesDark.xaml"/>
                 <ResourceDictionary Source="{CustomResource DarkResourcesPath}"/>
-            </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries>-->
         </ResourceDictionary>
-        <ResourceDictionary x:Key="Light">
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Input.UWP/Themes/ThemeResourcesLight.xaml"/>
-                <ResourceDictionary Source="{CustomResource LightResourcesPath}"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-        <ResourceDictionary x:Key="HighContrast">
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Input.UWP/Themes/ThemeResourcesHighContrast.xaml"/>
-                <ResourceDictionary Source="{CustomResource HighContrastResourcesPath}"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <!-- <ResourceDictionary x:Key="Light"> -->
+        <!--     <ResourceDictionary.MergedDictionaries> -->
+        <!--         <ResourceDictionary Source="ms-appx:///Telerik.Input/Themes/ThemeResourcesLight.xaml"/> -->
+        <!--         <ResourceDictionary Source="{CustomResource LightResourcesPath}"/> -->
+        <!--     </ResourceDictionary.MergedDictionaries> -->
+        <!-- </ResourceDictionary> -->
+        <!-- <ResourceDictionary x:Key="HighContrast"> -->
+        <!--     <ResourceDictionary.MergedDictionaries> -->
+        <!--         <ResourceDictionary Source="ms-appx:///Telerik.Input/Themes/ThemeResourcesHighContrast.xaml"/> -->
+        <!--         <ResourceDictionary Source="{CustomResource HighContrastResourcesPath}"/> -->
+        <!--     </ResourceDictionary.MergedDictionaries> -->
+        <!-- </ResourceDictionary> -->
     </ResourceDictionary.ThemeDictionaries>
 
     <!-- Common -->
@@ -701,3 +701,4 @@
     <!-- End Range Slider -->
 
 </ResourceDictionary>
+

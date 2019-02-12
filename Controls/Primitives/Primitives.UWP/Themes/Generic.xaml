@@ -13,8 +13,8 @@
     xmlns:theming="using:Telerik.UI.Xaml.Controls">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Primitives.UWP/Themes/Resources.xaml"/>
-        <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Primitives.UWP/Themes/SharedResources.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Telerik.Primitives/Themes/Resources.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Telerik.Primitives/Themes/SharedResources.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <!--ExpanderControl start-->

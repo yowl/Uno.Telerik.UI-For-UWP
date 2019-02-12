@@ -1,22 +1,32 @@
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.65">
   <PropertyGroup>
-    <TargetFrameworks>uap10.0;xamarinios10;MonoAndroid71</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;uap10.0.16299</TargetFrameworks>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <DefaultLanguage>en-US</DefaultLanguage>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <DefineConstants>$(DefineConstants);</DefineConstants>
   </PropertyGroup>
-
-  <Import Project="..\..\CrossTargetting.props" />
-
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="1.31.0-dev.193" />
+    <None Remove="Themes\ThemeResourcesDark.xaml" />
+    <None Remove="Themes\ThemeResourcesHighContrast.xaml" />
+    <None Remove="Themes\ThemeResourcesLight.xaml" />
+  </ItemGroup>
+  
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='xamarinios10' or '$(TargetFramework)'=='monoandroid80' or '$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="Uno.UI" Version="1.43.0-dev.850" />
   </ItemGroup>
 
   <ItemGroup>
 		<Page Include="Themes\Generic.xaml" />
-		<Page Include="Themes\ThemeResourcesLight.xaml" />
 		<Page Include="Themes\Resources.xaml" />
 		<Page Include="Themes\CommonResources.xaml" />
 		<Page Include="Themes\Calendar.xaml" />
+		<Page Include="Themes\ThemeResourcesLight.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</Page>
 	</ItemGroup>
   
   <ItemGroup>
@@ -25,10 +35,6 @@
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == 'MonoAndroid' or  '$(TargetFrameworkIdentifier)' == 'Xamarin.iOS' ">
-    <PackageReference Include="Uno.UI">
-			<Version>1.31.0-dev.193</Version>
-		</PackageReference>
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
-
 </Project>

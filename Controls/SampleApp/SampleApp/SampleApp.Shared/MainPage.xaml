@@ -12,6 +12,6 @@
 			<StackPanel>
 				<TextBlock Text="Telerik Samples" Margin="20" FontSize="30" />
 				<tInput:RadRangeSlider Height="100" Header="RadRangeSlider Sample" />
-			</StackPanel>
+        </StackPanel>
     </Grid>
 </Page>

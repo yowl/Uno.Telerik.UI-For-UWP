@@ -1595,7 +1595,7 @@ namespace Telerik.UI.Xaml.Controls.Input
                 return;
             }
 
-            UIElement popupChild = null;
+            FrameworkElement popupChild = null;
             foreach (FrameworkElement child in layoutRoot.Children)
             {
                 if (child.Tag == PopupChildTag)

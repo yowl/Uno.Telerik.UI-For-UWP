@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Resources;
+﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Resources;
 
 namespace Telerik.UI.Xaml.Controls
 {

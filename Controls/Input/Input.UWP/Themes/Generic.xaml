@@ -15,8 +15,8 @@
         <ResourceDictionary>
             <telerik:UserThemeResources x:Key="ResourceLoaderInitializer" />
         </ResourceDictionary>
-        <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Input.UWP/Themes/Resources.xaml" />
-        <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Input.UWP/Themes/Calendar.xaml" />
+        <ResourceDictionary Source="ms-appx:///Telerik.Input/Themes/Resources.xaml" />
+        <ResourceDictionary Source="ms-appx:///Telerik.Input/Themes/Calendar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!-- UNO TODO <primitives:ContentToVisibilityConverter x:Key="ContentToVisibilityConverter" />-->

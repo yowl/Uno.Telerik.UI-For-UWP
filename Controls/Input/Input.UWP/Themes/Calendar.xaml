@@ -6,27 +6,27 @@
     xmlns:theming="using:Telerik.UI.Xaml.Controls">
 
     <ResourceDictionary.ThemeDictionaries>
-        <ResourceDictionary x:Key="Default">
-            <theming:UserThemeResources x:Key="ResourceLoaderInitializer"/>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Input.UWP/Themes/ThemeResourcesDark.xaml"/>
-                <ResourceDictionary Source="{CustomResource DarkResourcesPath}"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-        <ResourceDictionary x:Key="Light">
-            <theming:UserThemeResources x:Key="ResourceLoaderInitializer"/>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Input.UWP/Themes/ThemeResourcesLight.xaml"/>
-                <ResourceDictionary Source="{CustomResource LightResourcesPath}"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-        <ResourceDictionary x:Key="HighContrast">
-            <theming:UserThemeResources x:Key="ResourceLoaderInitializer"/>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Input.UWP/Themes/ThemeResourcesHighContrast.xaml"/>
-                <ResourceDictionary Source="{CustomResource HighContrastResourcesPath}"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        <!-- <ResourceDictionary x:Key="Default"> -->
+        <!--     <theming:UserThemeResources x:Key="ResourceLoaderInitializer"/> -->
+        <!--     <ResourceDictionary.MergedDictionaries> -->
+        <!--         <ResourceDictionary Source="ms-appx:///Telerik.Input/Themes/ThemeResourcesDark.xaml"/> -->
+        <!--         <ResourceDictionary Source="{CustomResource DarkResourcesPath}"/> -->
+        <!--     </ResourceDictionary.MergedDictionaries> -->
+        <!-- </ResourceDictionary> -->
+        <!-- <ResourceDictionary x:Key="Light"> -->
+        <!--     <theming:UserThemeResources x:Key="ResourceLoaderInitializer"/> -->
+        <!--     <ResourceDictionary.MergedDictionaries> -->
+        <!--         <ResourceDictionary Source="ms-appx:///Telerik.Input/Themes/ThemeResourcesLight.xaml"/> -->
+        <!--         <ResourceDictionary Source="{CustomResource LightResourcesPath}"/> -->
+        <!--     </ResourceDictionary.MergedDictionaries> -->
+        <!-- </ResourceDictionary> -->
+        <!-- <ResourceDictionary x:Key="HighContrast"> -->
+        <!--     <theming:UserThemeResources x:Key="ResourceLoaderInitializer"/> -->
+        <!--     <ResourceDictionary.MergedDictionaries> -->
+        <!--         <ResourceDictionary Source="ms-appx:///Telerik.Input/Themes/ThemeResourcesHighContrast.xaml"/> -->
+        <!--         <ResourceDictionary Source="{CustomResource HighContrastResourcesPath}"/> -->
+        <!--     </ResourceDictionary.MergedDictionaries> -->
+        <!-- </ResourceDictionary> -->
     </ResourceDictionary.ThemeDictionaries>
 
     <Style TargetType="localCalendar:AppointmentControl">

@@ -15,24 +15,24 @@
 				<ResourceDictionary x:Key="Default">
             <theming:UserThemeResources x:Key="ResourceLoaderInitializer"/>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Primitives.UWP/Themes/ThemeResourcesDark.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Telerik.Primitives/Themes/ThemeResourcesDark.xaml"/>
                 <ResourceDictionary Source="{CustomResource DarkResourcesPath}"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>-->
         <ResourceDictionary x:Key="Light">
             <theming:UserThemeResources x:Key="ResourceLoaderInitializer"/>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Primitives.UWP/Themes/ThemeResourcesLight.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Telerik.Primitives/Themes/ThemeResourcesLight.xaml"/>
                 <ResourceDictionary Source="{CustomResource LightResourcesPath}"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-        <ResourceDictionary x:Key="HighContrast">
+        <!--<ResourceDictionary x:Key="HighContrast">
             <theming:UserThemeResources x:Key="ResourceLoaderInitializer"/>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Primitives.UWP/Themes/ThemeResourcesHighContrast.xaml"/>
+                <ResourceDictionary Source="ms-appx:///Telerik.Primitives/Themes/ThemeResourcesHighContrast.xaml"/>
                 <ResourceDictionary Source="{CustomResource HighContrastResourcesPath}"/>
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
+        </ResourceDictionary>-->
     </ResourceDictionary.ThemeDictionaries>
 
 
