@@ -21,14 +21,23 @@ using Windows.UI.Xaml.Navigation;
 
 namespace SDKExamples.UWP
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainPage : Page
-    {
-        public MainPage()
-        {
-            this.InitializeComponent();
+	/// <summary>
+	/// An empty page that can be used on its own or navigated to within a Frame.
+	/// </summary>
+	public sealed partial class MainPage : Page
+	{
+		public static Frame RootFrame;
+
+		public Windows.UI.Xaml.Controls.NavigationView NavigationView
+		{
+			get { return NavigationViewControl; }
+		}
+
+		public MainPage()
+		{
+			this.InitializeComponent();
+
+			MainPage.RootFrame = rootFrame;
 
 #if !NETFX_CORE
 			this.TopAppBar = new CommandBar();
@@ -36,12 +45,27 @@ namespace SDKExamples.UWP
 #endif
 
 			if (MainPage.Source == null)
-            {
-                this.LoadData();
-            }
-        }
+			{
+				this.LoadData();
+			}
 
-        public static IEnumerable Source { get; set; }
+#if __WASM__
+			switch (Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_MONO_RUNTIME_MODE"))
+			{
+				case "Interpreter":
+					UnoShell.AppEnvironmentMode = "Interpreted";
+					break;
+				case "FullAOT":
+					UnoShell.AppEnvironmentMode = "AOT";
+					break;
+				case "InterpreterAndAOT":
+					UnoShell.AppEnvironmentMode = "Mixed";
+					break;
+			}
+#endif
+		}
+
+		public static IEnumerable Source { get; set; }
 
 		private async void LoadData()
 		{
@@ -67,77 +91,44 @@ namespace SDKExamples.UWP
 			var text = await Windows.Storage.PathIO.ReadTextAsync("ms-appx:///Data/Examples.xml");
 #endif
 			var doc = XDocument.Parse(text);
+			var controls = this.GetControls(doc).ToArray();
 
-            this.DataContext = MainPage.Source = this.GetControls(doc).ToArray();
-        }
+			for (var i = 0; i < controls.Length; i++)
+			{
+				var controlData = controls[i] as ControlData;
+				var item = new Windows.UI.Xaml.Controls.NavigationViewItem()
+				{
+					Content = controlData.Name,
+					DataContext = controlData
+				};
 
-        private IEnumerable<ControlData> GetControls(XDocument doc)
-        {
+				item.Icon = new FontIcon() { Glyph = "&#x0000;" };
 
-            return from control in doc.Descendants("Control")
-                                     select new ControlData
-                                     (
-                                         control.Attribute("Name").Value,
-                                         from example in control.Descendants("Example")
-                                         select new Example(example.Attribute("ClassName").Value, example.Attribute("DisplayName").Value)
-                                      );
-        }
+				NavigationViewControl.MenuItems.Add(item);
+			}
+		}
 
-      //  private static ControlData CurrentItem { get; set; }
+		private IEnumerable<ControlData> GetControls(XDocument doc)
+		{
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
+			return from control in doc.Descendants("Control")
+				   select new ControlData
+				   (
+					   control.Attribute("Name").Value,
+					   from example in control.Descendants("Example")
+					   select new Example(example.Attribute("ClassName").Value, example.Attribute("DisplayName").Value)
+					);
+		}
 
-            var currentView = SystemNavigationManager.GetForCurrentView();
+		private void BackButtonClicked(object sender, RoutedEventArgs e)
+		{
+			this.DataContext = MainPage.Source;
+		}
 
-            var controlData = e.Parameter as ControlData;
-
-            if (controlData == null)
-            {
-                this.DataContext = MainPage.Source;
-                currentView.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-            }
-            else
-            {
-                this.DataContext = controlData.Examples;
-                currentView.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-            }
-        }
-
-        private void BackButtonClicked(object sender, RoutedEventArgs e)
-        {
-            this.DataContext = MainPage.Source;
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var currentView = SystemNavigationManager.GetForCurrentView();
-            var selectedItem = (sender as ListView).SelectedItem;
-            if (selectedItem != null)
-            {
-                var dataContext = (sender as FrameworkElement).DataContext;
-
-                var control = selectedItem as ControlData;
-
-                var example = selectedItem as Example;
-
-                if (control != null)
-                {
-                    var listType = typeof(MainPage);
-                    Frame.Navigate(listType, control);
-                }
-                else if (!string.IsNullOrEmpty(example.TypeName))
-                {
-                    var exampleType = Type.GetType(string.Format(example.TypeName));
-                    if (exampleType != null)
-                    {
-                        Frame.Navigate(exampleType, example.DisplayName);
-                        currentView.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-                    }
-                }
-            }
-
-        }
-    }
+		private void OnNavigationViewItemInvoked(Windows.UI.Xaml.Controls.NavigationView sender, Windows.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
+		{
+			var invokedItem = args.InvokedItem;
+			rootFrame.Navigate(typeof(SectionPage), invokedItem);
+		}
+	}
 }
