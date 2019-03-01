@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -46,6 +47,7 @@ namespace SampleApp
             }
 #endif
             Frame rootFrame = Windows.UI.Xaml.Window.Current.Content as Frame;
+            CoreWindow.CurrentThreadCoreWindow = Windows.UI.Xaml.Window.Current.CoreWindow;
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
