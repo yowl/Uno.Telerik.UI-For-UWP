@@ -1,6 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.46">
+  <!-- <Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0"> -->
 	<PropertyGroup>
-		<TargetFrameworks>uap10.0;xamarinios10;MonoAndroid80;netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>uap10.0;netstandard2.0</TargetFrameworks>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
 		<DefaultLanguage>en-US</DefaultLanguage>
 	</PropertyGroup>
@@ -8,7 +9,31 @@
 	<Import Project="..\..\CrossTargetting.props" />
 
 	<ItemGroup>
-	  <PackageReference Include="Uno.UI" Version="1.43.0-dev.850" />
+	  <None Remove="View\Columns\Resources\DefaultBooleanColumnEditorStyle.xaml" />
+	  <None Remove="View\Columns\Resources\DefaultBooleanColumnStyle.xaml" />
+	  <None Remove="View\Columns\Resources\DefaultComboBoxColumnEditorStyle.xaml" />
+	  <None Remove="View\Columns\Resources\DefaultDateColumnEditorStyle.xaml" />
+	  <None Remove="View\Columns\Resources\DefaultNumericalColumnEditorStyle.xaml" />
+	  <None Remove="View\Columns\Resources\DefaultTextColumnEditorStyle.xaml" />
+	  <None Remove="View\Columns\Resources\DefaultTextColumnFlyoutContentStyle.xaml" />
+	  <None Remove="View\Columns\Resources\DefaultTextColumnStyle.xaml" />
+	  <None Remove="View\Columns\Resources\DefaultTimeColumnEditorStyle.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="View\Columns\Resources\DefaultBooleanColumnEditorStyle.xaml" />
+	  <EmbeddedResource Include="View\Columns\Resources\DefaultBooleanColumnStyle.xaml" />
+	  <EmbeddedResource Include="View\Columns\Resources\DefaultComboBoxColumnEditorStyle.xaml" />
+	  <EmbeddedResource Include="View\Columns\Resources\DefaultDateColumnEditorStyle.xaml" />
+	  <EmbeddedResource Include="View\Columns\Resources\DefaultNumericalColumnEditorStyle.xaml" />
+	  <EmbeddedResource Include="View\Columns\Resources\DefaultTextColumnEditorStyle.xaml" />
+	  <EmbeddedResource Include="View\Columns\Resources\DefaultTextColumnFlyoutContentStyle.xaml" />
+	  <EmbeddedResource Include="View\Columns\Resources\DefaultTextColumnStyle.xaml" />
+	  <EmbeddedResource Include="View\Columns\Resources\DefaultTimeColumnEditorStyle.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Uno.UI" Version="1.43.0-dev.921" />
 	</ItemGroup>
 	
 	<PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
@@ -35,5 +60,29 @@
 		</PackageReference>
 		<Reference Include="Microsoft.CSharp" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Assets\FilterFlyout\ic_arrow_down.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Reorder\column_chooser_btn.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Assets\Reorder\column_chooser_btn_blue.png">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Themes\Generic.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Themes\Resources.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Themes\ThemeResourcesLight.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.2" />
+  </ItemGroup>
 
 </Project>

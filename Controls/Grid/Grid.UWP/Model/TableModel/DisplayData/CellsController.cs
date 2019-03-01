@@ -343,6 +343,7 @@ namespace Telerik.UI.Xaml.Controls.Grid
 
         private T GetCellDecorator(IItemInfoNode parentRow, ItemInfo columnItemInfo, int rowLine, int columnLine)
         {
+            Debug.WriteLine($"cellDecorator start ");
             Dictionary<int, T> columnCellsPair;
             if (!this.generatedRowCells.TryGetValue(rowLine, out columnCellsPair))
             {
@@ -365,8 +366,11 @@ namespace Telerik.UI.Xaml.Controls.Grid
 
             if (containerType == null)
             {
+                Debug.WriteLine($"cellDecorator containerType == null ");
+
                 return null;
             }
+            Debug.WriteLine($"cellDecorator cellDecorator.Value {cellValue} ");
 
             T cellDecorator;
             if (!columnCellsPair.TryGetValue(columnLine, out cellDecorator))
@@ -379,15 +383,22 @@ namespace Telerik.UI.Xaml.Controls.Grid
                 cellDecorator.parent = parentRow as Element;
             }
 
-            if (!object.Equals(cellDecorator.Value, cellValue) || cellDecorator.Column != columnItemInfo.Item || cellDecorator.Column.ShouldRefreshCell(cellDecorator))
+            Debug.WriteLine($"cellDecorator should refresh ");
+            Debug.WriteLine($"cellDecorator should refresh 1 {object.Equals(cellDecorator.Value, cellValue)}");
+            Debug.WriteLine($"cellDecorator should refresh 2 {cellDecorator.Column != columnItemInfo.Item}");
+//            Debug.WriteLine($"cellDecorator should refresh 3 {cellDecorator.Column.ShouldRefreshCell(cellDecorator)}");
+            Debug.WriteLine($"cellDecorator before if ");
+            if (!object.Equals(cellDecorator.Value, cellValue) || cellDecorator.Column != columnItemInfo.Item || true)
+//            if (!object.Equals(cellDecorator.Value, cellValue) || cellDecorator.Column != columnItemInfo.Item || cellDecorator.Column.ShouldRefreshCell(cellDecorator))
             {
+            Debug.WriteLine($"cellDecorator cellDecorator.Value {cellValue} ");
                 cellDecorator.Value = cellValue;
                 cellDecorator.Column = columnItemInfo.Item as DataGridColumn;
                 cellDecorator.Column.ItemInfo = columnItemInfo;
 
                 this.containerGenerator.PrepareContainerForItem(cellDecorator);
             }
-
+            Debug.WriteLine($"cellDecorator {cellDecorator.Value}");
             return cellDecorator;
         }
 

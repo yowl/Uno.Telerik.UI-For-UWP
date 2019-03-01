@@ -21,12 +21,12 @@
                 <ResourceDictionary Source="{CustomResource DarkResourcesPath}"/>
             </ResourceDictionary.MergedDictionaries>-->
         </ResourceDictionary>
-        <!-- <ResourceDictionary x:Key="Light"> -->
-        <!--     <ResourceDictionary.MergedDictionaries> -->
-        <!--         <ResourceDictionary Source="ms-appx:///Telerik.Input/Themes/ThemeResourcesLight.xaml"/> -->
-        <!--         <ResourceDictionary Source="{CustomResource LightResourcesPath}"/> -->
-        <!--     </ResourceDictionary.MergedDictionaries> -->
-        <!-- </ResourceDictionary> -->
+        <ResourceDictionary x:Key="Light">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Telerik.Input/Themes/ThemeResourcesLight.xaml"/>
+                <ResourceDictionary Source="{CustomResource LightResourcesPath}"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
         <!-- <ResourceDictionary x:Key="HighContrast"> -->
         <!--     <ResourceDictionary.MergedDictionaries> -->
         <!--         <ResourceDictionary Source="ms-appx:///Telerik.Input/Themes/ThemeResourcesHighContrast.xaml"/> -->

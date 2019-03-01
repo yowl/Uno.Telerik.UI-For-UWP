@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Runtime.CompilerServices;
 
@@ -51,6 +52,7 @@ namespace Telerik.Data.Core.Fields
 
         public object GetValue(object item)
         {
+            Debug.Write("DynamicObject Get Value");
 #if !NETSTANDARD2_0
             DynamicObject dynamicObject = item as DynamicObject;
             if (dynamicObject != null)

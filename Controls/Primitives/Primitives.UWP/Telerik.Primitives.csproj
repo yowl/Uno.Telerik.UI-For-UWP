@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
-    <TargetFrameworks>uap10.0;xamarinios10;MonoAndroid80;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>uap10.0;netstandard2.0</TargetFrameworks>
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
@@ -35,19 +35,34 @@
 	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="1.43.0-dev.850" />
+    <PackageReference Include="Uno.UI" Version="1.43.0-dev.921" />
   </ItemGroup>
 
   <ItemGroup>
     <Page Include="Themes\Generic.xaml" />
     <Page Include="Themes\Resources.xaml" />
-    <Page Include="Themes\SharedResources.xaml" />
-    <Page Include="Themes\ThemeColorsLight.xaml" />
-    <Page Include="Themes\ThemeResourcesLight.xaml" />
+    <Page Include="Themes\SharedResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ThemeColorsLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ThemeResourcesLight.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core.UWP\Telerik.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Themes\Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 
 </Project>

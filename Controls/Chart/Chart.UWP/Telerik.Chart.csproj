@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
 	<PropertyGroup>
-		<TargetFrameworks>uap10.0;xamarinios10;MonoAndroid80;netstandard2.0</TargetFrameworks>
+		<TargetFrameworks>uap10.0;netstandard2.0</TargetFrameworks>
 		<Product>$(AssemblyName) ($(TargetFramework))</Product>
 		<DefaultLanguage>en-US</DefaultLanguage>
 	</PropertyGroup>
@@ -8,7 +8,7 @@
 	<Import Project="..\..\CrossTargetting.props" />
 
 	<ItemGroup>
-	  <PackageReference Include="Uno.UI" Version="1.43.0-dev.850" />
+	  <PackageReference Include="Uno.UI" Version="1.43.0-dev.921" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -32,6 +32,15 @@
 		<Reference Include="Microsoft.CSharp" />
 		<Reference Include="System.Numerics" />
 		<Reference Include="System.Numerics.Vectors" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Themes\Generic.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Themes\ThemeResourcesLight.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </None>
 	</ItemGroup>
 
 </Project>

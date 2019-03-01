@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Telerik.Data.Core.Fields
 {
@@ -46,6 +47,7 @@ namespace Telerik.Data.Core.Fields
 
         public object GetValue(object item)
         {
+            Debug.Write("ExpandoObjectieldInfo Get Value");
             IDictionary<string, object> expandoObject = item as IDictionary<string, object>;
             if (expandoObject != null)
             {

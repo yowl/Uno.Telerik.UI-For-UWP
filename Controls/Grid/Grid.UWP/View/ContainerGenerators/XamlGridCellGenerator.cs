@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,7 @@ namespace Telerik.UI.Xaml.Controls.Grid
             var layer = this.owner.GetContentLayerForColumn(decorator.Column);
             if (layer != null)
             {
+                Debug.WriteLine("IUIContainerGenerator.PrepareContainerForItem");
                 layer.PrepareCell(decorator);
             }
         }

@@ -47,8 +47,9 @@ namespace SampleApp
             }
 #endif
             Frame rootFrame = Windows.UI.Xaml.Window.Current.Content as Frame;
+#if __WASM__
             CoreWindow.CurrentThreadCoreWindow = Windows.UI.Xaml.Window.Current.CoreWindow;
-
+#endif
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)

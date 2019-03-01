@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using Telerik.UI.Xaml.Controls.Grid.Primitives;
 using Telerik.UI.Xaml.Controls.Primitives;
@@ -108,16 +109,27 @@ namespace Telerik.UI.Xaml.Controls.Grid
 
         internal override void PrepareCell(GridCellModel cell)
         {
-            base.PrepareCell(cell);
+            Debug.WriteLine("DataGridTextColumn.PrepareCell");
+            try
+            {
+                base.PrepareCell(cell);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+            }
+            Debug.WriteLine("DataGridTextColumn.PrepareCell base called");
 
             TextBlock tb = cell.Container as TextBlock;
             if (tb == null)
             {
+            Debug.WriteLine("DataGridTextColumn.PrepareCell tb == null");
                 return;
             }
 
             if (cell.Value == null)
             {
+            Debug.WriteLine("DataGridTextColumn.PrepareCell cell.Value == null");
                 tb.ClearValue(TextBlock.TextProperty);
                 return;
             }
@@ -132,8 +144,10 @@ namespace Telerik.UI.Xaml.Controls.Grid
                 text = Convert.ToString(cell.Value, CultureInfo.CurrentUICulture);
             }
 
+            Debug.WriteLine($"DataGridTextColumn.PrepareCell is  text changed {text}");
             if (tb.Text != text)
             {
+                Debug.WriteLine($"DataGridTextColumn.PrepareCell changing text {text}");
                 tb.Text = text;
             }
         }

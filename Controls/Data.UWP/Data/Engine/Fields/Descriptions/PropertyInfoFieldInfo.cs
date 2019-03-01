@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace Telerik.Data.Core.Fields
@@ -87,12 +88,17 @@ namespace Telerik.Data.Core.Fields
         /// <inheritdoc />
         public object GetValue(object item)
         {
+            Debug.Write("PropertyInfoFieldInfo Get Value");
             if (this.propertyAccess != null)
             {
+            Debug.Write("PropertyInfoFieldInfo Get Value propertyAccess");
                 return this.propertyAccess(item);
             }
             else
             {
+                Debug.Write($"PropertyInfoFieldInfo Get Value GetValue 1");
+                Debug.Write($"PropertyInfoFieldInfo Get Value GetValue {item}");
+
                 return this.propertyInfo.GetValue(item, null);
             }
         }

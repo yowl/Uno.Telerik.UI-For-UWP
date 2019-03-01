@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Telerik.Core;
 using Telerik.UI.Xaml.Controls.Grid.Primitives;
 using Windows.Foundation;
@@ -64,6 +65,7 @@ namespace Telerik.UI.Xaml.Controls.Grid.View
 
         internal override void PrepareCell(GridCellModel cell)
         {
+            Debug.WriteLine("XamlContentLayer.PrepareCell");
             cell.Column.PrepareCell(cell);
         }
 

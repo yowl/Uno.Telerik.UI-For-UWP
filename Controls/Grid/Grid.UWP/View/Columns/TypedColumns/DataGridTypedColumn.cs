@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using Telerik.Core;
 using Telerik.Data.Core;
@@ -211,11 +212,14 @@ namespace Telerik.UI.Xaml.Controls.Grid
                 return group.Name;
             }
 
+            Debug.WriteLine("GetValueForInstance");
             var memberAccess = this.propertyInfo as IMemberAccess;
             if (memberAccess != null)
             {
+            Debug.WriteLine("GetValueForInstance memberAccess");
                 return memberAccess.GetValue(instance);
             }
+            Debug.WriteLine("GetValueForInstance null");
 
             return null;
         }
@@ -241,6 +245,7 @@ namespace Telerik.UI.Xaml.Controls.Grid
 
         internal override void PrepareCell(GridCellModel cell)
         {
+            Debug.WriteLine("base PrepareCell");
             FrameworkElement element = cell.Container as FrameworkElement;
             if (element == null)
             {

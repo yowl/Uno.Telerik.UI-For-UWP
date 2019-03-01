@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Telerik.Data.Core;
 using Telerik.Data.Core.Layouts;
@@ -564,6 +565,7 @@ namespace Telerik.UI.Xaml.Controls.Grid
 
         internal bool ShouldRefreshCell(GridCellModel model)
         {
+            Debug.WriteLine("ShouldRefreshCell");
             var currentUpdate = this.Model.GridView.UpdateService.CurrentExecutingUpdate;
             bool contentUpdated = currentUpdate != null && currentUpdate.Sender == this && currentUpdate.Flags.HasFlag(UpdateFlags.AffectsContent);
 

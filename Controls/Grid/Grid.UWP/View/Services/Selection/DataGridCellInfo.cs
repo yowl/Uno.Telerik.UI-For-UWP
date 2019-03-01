@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using Windows.UI.Xaml.Data;
 using Telerik.Data.Core.Layouts;
 
 namespace Telerik.UI.Xaml.Controls.Grid
@@ -7,6 +9,7 @@ namespace Telerik.UI.Xaml.Controls.Grid
     /// Defines the abstraction of a cell within a <see cref="RadDataGrid"/> row.
     /// A grid cell is generally the intersection of a grid row and grid column.
     /// </summary>
+    [Bindable]
     public class DataGridCellInfo
     {
         private ItemInfo rowItemInfo = ItemInfo.Invalid;
@@ -61,10 +64,12 @@ namespace Telerik.UI.Xaml.Controls.Grid
         {
             get
             {
+                Debug.WriteLine("Value getter");
                 if (this.Column != null && this.Item != null)
                 {
                     return this.Column.GetValueForInstance(this.Item);
                 }
+                Debug.WriteLine("Value getter null");
 
                 return null;
             }

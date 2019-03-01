@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -13,8 +14,20 @@ namespace Telerik.Data.Core
         /// <param name="propertyPath">The path of the property which value will be returned.</param>
         public static Func<object, object> CreateGetValueFunc(Type itemType, string propertyPath)
         {
+            Debug.WriteLine("getting GetValueFunc");
             PropertyInfo propertyInfo = itemType.GetRuntimeProperties().Where(a => a.Name.Equals(propertyPath) && !a.GetIndexParameters().Any()).FirstOrDefault();
-            return item => propertyInfo?.GetValue(item);
+            if (propertyInfo == null)
+            {
+                Debug.WriteLine($"getting GetValueFunc propertyInfo was null for {propertyPath}");
+
+            }
+            return item =>
+            {
+                Debug.WriteLine($"calling GetValueFunc {propertyInfo}");
+                var x = propertyInfo?.GetValue(item);
+                Debug.WriteLine($"calling GetValueFunc got {x}");
+                return x;
+            };
         }
 
         internal static Action<object, object> CreateSetValueAction(Type itemType, string propertyPath)

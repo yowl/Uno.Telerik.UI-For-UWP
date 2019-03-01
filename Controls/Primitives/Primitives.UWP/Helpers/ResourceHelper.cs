@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Windows.Storage.Streams;
@@ -14,6 +15,11 @@ namespace Telerik.UI.Xaml.Controls.Primitives
         public static object LoadEmbeddedResource(Type type, string resourcePath, object key)
         {
             Assembly assembly = type.GetTypeInfo().Assembly;
+            Debug.WriteLine(resourcePath);
+            if (resourcePath.Contains("UI.Xaml.Controls."))
+            {
+                resourcePath = resourcePath.Replace("UI.Xaml.Controls.", "");
+            }
             using (Stream stream = assembly.GetManifestResourceStream(resourcePath))
             {
                 StreamReader reader = new StreamReader(stream);

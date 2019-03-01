@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
@@ -6,7 +6,8 @@
 		<WasmHead>true</WasmHead>
 		<DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
 		<NoWarn>NU1701</NoWarn>
-	</PropertyGroup>
+    <WasmShellILLinkerEnabled>false</WasmShellILLinkerEnabled>
+  </PropertyGroup>
 
 	<ItemGroup>
 		<Content Include="..\Uno.Sample.ControlLibrary.UWP\Assets\*.png" Link="Assets\%(FileName)%(Extension)" />
@@ -35,11 +36,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Uno.UI" Version="1.43.0-dev.850" />
-		<PackageReference Include="Uno.Wasm.Bootstrap" Version="1.0.0-dev.192" />
+		<PackageReference Include="Uno.UI" Version="1.43.0-dev.921" />
+		<PackageReference Include="Uno.Wasm.Bootstrap" Version="1.0.0-dev.196" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Grid\Grid.UWP\Telerik.Grid.csproj" />
 	  <ProjectReference Include="..\..\..\Input\Input.UWP\Telerik.Input.csproj" />
 	</ItemGroup>
 

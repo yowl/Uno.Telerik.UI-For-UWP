@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using Telerik.Core;
 using Telerik.UI.Automation.Peers;
@@ -659,6 +660,7 @@ namespace Telerik.UI.Xaml.Controls.Input
         /// </summary>
         protected override bool ApplyTemplateCore()
         {
+            Debug.WriteLine("ApplyTemplateCore");
             bool applied = base.ApplyTemplateCore();
 
             this.textBox = this.GetTemplatePartField<TextBox>("PART_TextBox");
@@ -685,6 +687,8 @@ namespace Telerik.UI.Xaml.Controls.Input
             this.UpdateInputScope(this.InputScope);
             this.textBox.AddHandler(TextBox.KeyDownEvent, this.textBoxKeyDownHandler, true);
             this.textBox.TextChanged += this.OnTextBoxTextChanged;
+            Debug.WriteLine("OnTemplateApplied");
+
             this.textBox.GotFocus += this.OnTextBoxGotFocus;
             this.textBox.LostFocus += this.OnTextBoxLostFocus;
 
@@ -959,8 +963,19 @@ namespace Telerik.UI.Xaml.Controls.Input
 
         private void OnTextBoxKeyDown(object sender, KeyRoutedEventArgs e)
         {
+            Debug.WriteLine("OnTextBoxKeyDown");
             // marking the event as Handled will prevent the TextBox from updating its Text in case invalid character is pressed.
-            e.Handled = !this.PreviewKeyDown(e.Key);
+            try
+            {
+                e.Handled = !this.PreviewKeyDown(e.Key);
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("OnTextBoxKeyDown ex " + ex);
+            }
+            Debug.WriteLine("OnTextBoxKeyDown " + e.Handled);
+
         }
 
         private void OnTextBoxTextChanged(object sender, TextChangedEventArgs e)
