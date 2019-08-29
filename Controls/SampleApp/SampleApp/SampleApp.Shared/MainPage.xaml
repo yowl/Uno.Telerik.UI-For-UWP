@@ -12,8 +12,8 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 			<StackPanel>
 				<TextBlock Text="Telerik Samples" Margin="20" FontSize="30" />
-                <grid:RadDataGrid ItemsSource="{Binding Items}"/>
-                <!-- <tInput:RadNumericBox ButtonsVisibility="Collapsed" Maximum="99999" ></tInput:RadNumericBox> -->
+                <!-- <grid:RadDataGrid ItemsSource="{Binding Items}"/> -->
+                <tInput:RadNumericBox ButtonsVisibility="Collapsed" Maximum="99999" ></tInput:RadNumericBox>
 				<!-- <tInput:RadRangeSlider Height="100" Header="RadRangeSlider Sample" /> -->
         </StackPanel>
     </Grid>

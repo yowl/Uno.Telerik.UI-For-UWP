@@ -35,7 +35,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///Telerik.Primitives/Themes/SharedResources.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-
+    <FontFamily x:Key="ContentControlThemeFontFamily">Times new roman</FontFamily>
     <localView:GroupPositionToAlignmentConverter x:Key="PositionToAlignmentConverter" />
     <core:BoolToVisibilityConverter x:Key="VisibilityConverter" />
     <localView:DataOperationsButtonTextConverter x:Key="DataOperationsButtonTextConverter" />
@@ -416,29 +416,34 @@
                             BorderThickness="{TemplateBinding BorderThickness}">
 
                         <localPrimitives:DataGridRootPanel x:Name="PART_TableRoot">
-                            <ScrollViewer x:Name="PART_ScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" 
-                                          HorizontalScrollMode="Auto" VerticalScrollMode="Auto" ZoomMode="Disabled" IsTabStop="False">
-                                <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <ScrollViewer x:Name="PART_ScrollViewer" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" 
+                                          HorizontalScrollMode="Auto" VerticalScrollMode="Auto" ZoomMode="Disabled" IsTabStop="False" Grid.Row="1" Grid.Column="1">
+                                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top">
 
-                                    <Canvas x:Name="PART_DecorationsHost"/>
-                                    <localPrimitives:DataGridCellsPanel x:Name="PART_CellsHost" Background="#00000000" />
-                                    <Canvas x:Name="PART_ScrollableAdornerHost"/>
+                                        <Canvas x:Name="PART_DecorationsHost"/>
+                                        <localPrimitives:DataGridCellsPanel x:Name="PART_CellsHost" Background="#00000000" />
+                                        <Canvas x:Name="PART_ScrollableAdornerHost"/>
 
-                                </Grid>
-                                <ScrollViewer.TopHeader>
-                                    <localPrimitives:DataGridColumnHeaderPanel x:Name="PART_ColumnHeadersHost" ManipulationMode="All" Background="{TemplateBinding Background}"/>
-                                </ScrollViewer.TopHeader>
-                                <ScrollViewer.TopLeftHeader>
-                                    <Canvas x:Name="PART_FrozenColumnHeadersHost" Background="{TemplateBinding Background}"/>
-                                </ScrollViewer.TopLeftHeader>
-                                <ScrollViewer.LeftHeader>
-                                    <Grid>
-                                        <Canvas x:Name="PART_FrozenDecorationsHost" Background="{TemplateBinding Background}"/>
-                                        <Canvas x:Name="PART_FrozenColumnsHost" Background="#00000000"/>
-                                        <Canvas x:Name="PART_GroupHeadersHost"/>
                                     </Grid>
-                                </ScrollViewer.LeftHeader>
-                            </ScrollViewer>
+                                </ScrollViewer>
+                                <Canvas x:Name="PART_FrozenColumnHeadersHost" Background="{TemplateBinding Background}"/>
+                                <localPrimitives:DataGridColumnHeaderPanel x:Name="PART_ColumnHeadersHost" ManipulationMode="All" Background="{TemplateBinding Background}"/>
+                                <Grid Grid.Row="1">
+                                    <Canvas x:Name="PART_FrozenDecorationsHost" Background="{TemplateBinding Background}"/>
+                                    <Canvas x:Name="PART_FrozenColumnsHost" Background="#00000000"/>
+                                    <Canvas x:Name="PART_GroupHeadersHost"/>
+                                </Grid>
+                            </Grid>
+
 
                             <localPrimitives:FrozenGroupsPanel x:Name="PART_HeadersHost" />
                             <localPrimitives:DataGridServicePanel Position="{TemplateBinding GroupPanelPosition}" x:Name="PART_ServicePanel" IsTabStop="False"/>
@@ -646,10 +651,10 @@
                                     </Image>
                                     <TextBlock x:Name="DragHintGlyph" FontFamily="{ThemeResource SymbolThemeFontFamily}" Text="&#xE169;"
                                              VerticalAlignment="Top" Visibility="Collapsed"/>
-									<localPrimitives:RotatedContainer  HorizontalAlignment="Center" x:Name="RotatedContainer">
-										<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="DragHereText"/>
-									</localPrimitives:RotatedContainer>
-								</Grid>
+                                    <localPrimitives:RotatedContainer  HorizontalAlignment="Center" x:Name="RotatedContainer">
+                                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="DragHereText"/>
+                                    </localPrimitives:RotatedContainer>
+                                </Grid>
                                 <Rectangle x:Name="InnerShadow" Fill="{ThemeResource TelerikGridInnerShadowBrush}" 
                                        HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1"/>
                             </Grid>
@@ -2107,7 +2112,7 @@
         <Setter Property="Background" Value="{ThemeResource TelerikGridBackgroundBrush}"/>
         <Setter Property="MinWidth" Value="50"/>
         <Setter Property="MinHeight" Value="20"/>
-        
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="localPrimitives:DataGridRowDetailsControl">
