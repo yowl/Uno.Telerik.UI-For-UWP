@@ -172,6 +172,12 @@ namespace Telerik.UI.Xaml.Controls.Input
         public static readonly DependencyProperty IsClearButtonVisibleProperty =
             DependencyProperty.Register(nameof(IsClearButtonVisible), typeof(bool), typeof(RadAutoCompleteBox), new PropertyMetadata(true, OnIsClearButtonVisibleChanted));
 
+        /// <summary>
+        /// Identifies the <see cref="SelectAllOnKeyboardFocus"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty SelectAllOnKeyboardFocusProperty =
+            DependencyProperty.Register(nameof(SelectAllOnKeyboardFocus), typeof(bool), typeof(RadAutoCompleteBox), new PropertyMetadata(true, OnSelectAllOnKeyboardFocusChanged));
+
         internal const double PopupOffsetFromTextBox = 2.0;
 
 #if NETFX_CORE
@@ -790,6 +796,21 @@ namespace Telerik.UI.Xaml.Controls.Input
             set { this.SetValue(IsClearButtonVisibleProperty, value); }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the control should select all of the text when it gets the focus.
+        /// </summary>
+        public bool SelectAllOnKeyboardFocus
+        {
+            get
+            {
+                return (bool)this.GetValue(SelectAllOnKeyboardFocusProperty);
+            }
+            set
+            {
+                this.SetValue(SelectAllOnKeyboardFocusProperty, value);
+            }
+        }
+
         private double DropDownClampedHeight
         {
             get
@@ -1059,6 +1080,10 @@ namespace Telerik.UI.Xaml.Controls.Input
             this.textbox.LostFocus += this.OnTextBoxLostFocus;
 
             this.textbox.Text = this.textCache ?? string.Empty;
+            if (!this.SelectAllOnKeyboardFocus)
+            {
+                this.ClearTextSelection();
+            }
 
             this.suggestionsControl.owner = this;
             this.suggestionsControl.MaxHeight = this.DropDownMaxHeight;
@@ -1339,6 +1364,15 @@ namespace Telerik.UI.Xaml.Controls.Input
             }
         }
 
+        private static void OnSelectAllOnKeyboardFocusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(bool)e.NewValue)
+            {
+                var autoComplete = d as RadAutoCompleteBox;
+                autoComplete.ClearTextSelection();
+            }
+        }
+
         private ITextSearchProvider GetTextSearchProvider()
         {
             switch (this.FilterMode)
@@ -1616,7 +1650,11 @@ namespace Telerik.UI.Xaml.Controls.Input
             this.isUserTyping = true;
 
             this.UpdateWatermarkVisibility();
-            this.UpdateCaretPosition();
+
+            if (this.SelectAllOnKeyboardFocus)
+            {
+                this.UpdateCaretPosition();
+            }
         }
 
         private void OnTextBoxLostFocus(object sender, RoutedEventArgs args)
@@ -1632,6 +1670,22 @@ namespace Telerik.UI.Xaml.Controls.Input
             this.IsDropDownOpen = false;
 
             this.UpdateWatermarkVisibility();
+
+            if (!this.SelectAllOnKeyboardFocus)
+            {
+                this.ClearTextSelection();
+            }
+        }
+
+        private void ClearTextSelection()
+        {
+            if (this.textbox == null)
+            {
+                return;
+            }
+
+            this.textbox.SelectionStart = this.textbox.Text.Length;
+            this.textbox.SelectionLength = 0;
         }
 
         private void UpdateWatermarkVisibility()
@@ -1655,8 +1709,7 @@ namespace Telerik.UI.Xaml.Controls.Input
             }
             else if (this.setProgrammaticFocus || (this.textbox.FocusState == FocusState.Keyboard && !this.shouldMarkText))
             {
-                this.textbox.SelectionStart = this.textbox.Text.Length;
-                this.textbox.SelectionLength = 0;
+                this.ClearTextSelection();
             }
         }
 
