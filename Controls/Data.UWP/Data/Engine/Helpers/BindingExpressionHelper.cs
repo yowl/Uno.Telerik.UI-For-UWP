@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace Telerik.Data.Core
@@ -13,20 +13,15 @@ namespace Telerik.Data.Core
         /// <param name="propertyPath">The path of the property which value will be returned.</param>
         public static Func<object, object> CreateGetValueFunc(Type itemType, string propertyPath)
         {
-            Debug.WriteLine("getting GetValueFunc");
+            var parameter = Expression.Parameter(itemType, "item");
             Expression getter = BindingExpressionHelper.GenerateMemberExpression(propertyPath, parameter);
-            if (propertyInfo == null)
-            {
-                Debug.WriteLine($"getting GetValueFunc propertyInfo was null for {propertyPath}");
 
-            }
-            return item =>
-            {
-                Debug.WriteLine($"calling GetValueFunc {propertyInfo}");
-                var x = propertyInfo?.GetValue(item);
-                Debug.WriteLine($"calling GetValueFunc got {x}");
-                return x;
-            };
+            var lambda = Expression.Lambda(getter, parameter);
+            var compiled = lambda.Compile();
+            var methodInfo = typeof(BindingExpressionHelper).GetTypeInfo()
+                .GetDeclaredMethod("ToUntypedSingleParamFunc")
+                .MakeGenericMethod(new[] { itemType, lambda.Body.Type });
+            return (Func<object, object>)methodInfo.Invoke(null, new object[] { compiled });
         }
 
         internal static Action<object, object> CreateSetValueAction(Type itemType, string propertyPath)
