@@ -113,7 +113,7 @@ namespace Telerik.UI.Xaml.Controls.Grid
             {
                 if (this.defaultCellEditorStyle == null)
                 {
-                    this.defaultCellEditorStyle = ResourceHelper.LoadEmbeddedResource(
+                    this.defaultCellEditorStyle = Telerik.UI.Xaml.Controls.Primitives.ResourceHelper.LoadEmbeddedResource(
                         typeof(DataGridTextColumn),
                         "Telerik.UI.Xaml.Controls.Grid.View.Columns.Resources.DefaultComboBoxColumnEditorStyle.xaml",
                         "DefaultColumnEditorStyle") as Style;

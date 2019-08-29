@@ -6,6 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:tInput="using:Telerik.UI.Xaml.Controls.Input"
+    xmlns:controls="using:Telerik.UI.Xaml.Controls"
+    xmlns:primitives="using:Telerik.UI.Xaml.Controls.Primitives"
     xmlns:grid="using:Telerik.UI.Xaml.Controls.Grid"
     mc:Ignorable="d">
 
@@ -13,7 +15,7 @@
 			<StackPanel>
 				<TextBlock Text="Telerik Samples" Margin="20" FontSize="30" />
                 <!-- <grid:RadDataGrid ItemsSource="{Binding Items}"/> -->
-                <tInput:RadNumericBox ButtonsVisibility="Collapsed" Maximum="99999" ></tInput:RadNumericBox>
+            <tInput:RadNumericBox AcceptsDecimalSeparator="True" ButtonsVisibility="Collapsed" Maximum="99999" ></tInput:RadNumericBox>
 				<!-- <tInput:RadRangeSlider Height="100" Header="RadRangeSlider Sample" /> -->
         </StackPanel>
     </Grid>

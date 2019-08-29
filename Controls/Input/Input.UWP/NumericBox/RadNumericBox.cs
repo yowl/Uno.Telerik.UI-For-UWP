@@ -703,12 +703,20 @@ namespace Telerik.UI.Xaml.Controls.Input
 
             this.UpdateInputScope(this.InputScope);
 
+            // Uno/Wasm reports this as true even though its not implemented
             if (this.isPreviewKeyDownPresent)
+//            if (false)
             {
+#if NETSTANDARD2_0
+                Console.WriteLine("isPreviewKeyDownPresent");
+#endif
                 this.textBox.PreviewKeyDown += this.OnTextBoxPreviewKeyDown;
             }
             else
             {
+#if NETSTANDARD2_0
+                Console.WriteLine("!isPreviewKeyDownPresent");
+#endif
                 this.textBox.AddHandler(TextBox.KeyDownEvent, this.textBoxKeyDownHandler, true);
             }
 
@@ -1026,7 +1034,9 @@ namespace Telerik.UI.Xaml.Controls.Input
 
         private void OnTextBoxPreviewKeyDown(object sender, KeyRoutedEventArgs e)
         {
-            Debug.WriteLine("OnTextBoxKeyDown");
+#if NETSTANDARD2_0
+            Console.WriteLine("OnTextBoxKeyDown");
+#endif
             // marking the event as Handled will prevent the TextBox from updating its Text in case invalid character is pressed.
             try
             {

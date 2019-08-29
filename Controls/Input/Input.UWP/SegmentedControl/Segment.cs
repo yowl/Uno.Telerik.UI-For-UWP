@@ -319,6 +319,7 @@ namespace Telerik.UI.Xaml.Controls.Input
             this.UpdateVisualState(true);
         }
 
+#if UAP10
         /// <inheritdoc/>
         protected override void OnPointerReleased(PointerRoutedEventArgs e)
         {
@@ -330,6 +331,7 @@ namespace Telerik.UI.Xaml.Controls.Input
             base.OnPointerReleased(e);
             this.UpdateVisualState(true);
         }
+#endif
 
         private static void OnIsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -388,10 +390,12 @@ namespace Telerik.UI.Xaml.Controls.Input
                 {
                     state = SegmentVisualState.SelectedPressed;
                 }
+#if UAP10 // WASM Workaround
                 else if (this.IsPointerOver)
                 {
                     state = SegmentVisualState.SelectedPointerOver;
                 }
+#endif
                 else
                 {
                     state = SegmentVisualState.Selected;
@@ -407,10 +411,12 @@ namespace Telerik.UI.Xaml.Controls.Input
                 {
                     state = SegmentVisualState.Pressed;
                 }
+#if UAP10 // WASM Workaround
                 else if (this.IsPointerOver)
                 {
                     state = SegmentVisualState.PointerOver;
                 }
+#endif
                 else
                 {
                     state = SegmentVisualState.Normal;

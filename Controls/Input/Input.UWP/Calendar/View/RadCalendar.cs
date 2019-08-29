@@ -377,7 +377,7 @@ namespace Telerik.UI.Xaml.Controls.Input
 
         static RadCalendar()
         {
-            RadCalendar.MultiDayViewResources = ResourceHelper.GetResourceDictionaryByPath(typeof(RadCalendar), "Telerik.UI.Xaml.Controls.Input.Themes.DefaultCalendarTimerRulerResources.xaml");
+            RadCalendar.MultiDayViewResources = Telerik.UI.Xaml.Controls.Primitives.ResourceHelper.GetResourceDictionaryByPath(typeof(RadCalendar), "Telerik.UI.Xaml.Controls.Input.Themes.DefaultCalendarTimerRulerResources.xaml");
         }
 
         /// <summary>
