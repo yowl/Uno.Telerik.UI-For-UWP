@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 
 namespace Telerik.Data.Core
@@ -15,7 +14,7 @@ namespace Telerik.Data.Core
         public static Func<object, object> CreateGetValueFunc(Type itemType, string propertyPath)
         {
             Debug.WriteLine("getting GetValueFunc");
-            PropertyInfo propertyInfo = itemType.GetRuntimeProperties().Where(a => a.Name.Equals(propertyPath) && !a.GetIndexParameters().Any()).FirstOrDefault();
+            Expression getter = BindingExpressionHelper.GenerateMemberExpression(propertyPath, parameter);
             if (propertyInfo == null)
             {
                 Debug.WriteLine($"getting GetValueFunc propertyInfo was null for {propertyPath}");
@@ -32,19 +31,69 @@ namespace Telerik.Data.Core
 
         internal static Action<object, object> CreateSetValueAction(Type itemType, string propertyPath)
         {
-            var itemInfo = itemType.GetRuntimeProperties().Where(a => a.Name.Equals(propertyPath) && !a.GetIndexParameters().Any()).FirstOrDefault();
-
-            if (itemInfo != null && itemInfo.CanWrite)
-            {
-                return new Action<object, object>((item, propertyValue) => itemInfo.SetMethod.Invoke(item, new object[] { propertyValue }));
-            }
-
-            return null;
+            var setValueFunc = BindingExpressionHelper.CreateSetValueFunc(itemType, propertyPath);
+            return setValueFunc != null ? new Action<object, object>((item, propertyValue) => setValueFunc?.Invoke(item, propertyValue)) : null;
         }
 
-        private static Func<object, object> ToUntypedFunc<T, TResult>(Func<T, TResult> func)
+        internal static Func<object, object, object> CreateSetValueFunc(Type itemType, string propertyPath)
+        {
+            var parameter = Expression.Parameter(itemType, "item");
+            Expression getter = BindingExpressionHelper.GenerateMemberExpression(propertyPath, parameter);
+            if (getter.NodeType == ExpressionType.MemberAccess)
+            {
+                MemberExpression memberExpression = (MemberExpression)getter;
+                PropertyInfo propertyInfo = (PropertyInfo)memberExpression.Member;
+                if (!propertyInfo.CanWrite)
+                {
+                    return null;
+                }
+            }
+
+            ParameterExpression valueExp = Expression.Parameter(getter.Type, "propertyValue");
+            BinaryExpression assignExp = Expression.Assign(getter, valueExp);
+
+            var lambda = Expression.Lambda(assignExp, parameter, valueExp);
+            var compiled = lambda.Compile();
+
+            var declaredActionMethod = typeof(BindingExpressionHelper).GetTypeInfo().GetDeclaredMethod("ToUntypedDoubleParamFunc");
+            var methodInfo = declaredActionMethod.MakeGenericMethod(itemType, lambda.Body.Type, lambda.Body.Type);
+            return (Func<object, object, object>)methodInfo.Invoke(null, new object[] { compiled });
+        }
+
+        private static Func<object, object> ToUntypedSingleParamFunc<T, TResult>(Func<T, TResult> func)
         {
             return item => func.Invoke((T)item);
+        }
+
+        private static Func<object, object, object> ToUntypedDoubleParamFunc<T, U, TResult>(Func<T, U, TResult> func)
+        {
+            return (item, propertyValue) => func.Invoke((T)item, (U)propertyValue);
+        }
+
+        private static Expression GenerateMemberExpression(string propertyPath, ParameterExpression parameter)
+        {
+            Expression getter;
+            if (string.IsNullOrEmpty(propertyPath))
+            {
+                getter = parameter;
+            }
+            else
+            {
+                if (propertyPath.Contains("."))
+                {
+                    getter = parameter;
+                    foreach (var member in propertyPath.Split('.'))
+                    {
+                        getter = Expression.PropertyOrField(getter, member);
+                    }
+                }
+                else
+                {
+                    getter = Expression.PropertyOrField(parameter, propertyPath);
+                }
+            }
+
+            return getter;
         }
     }
 }

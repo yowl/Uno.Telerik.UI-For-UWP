@@ -6,7 +6,6 @@ using Telerik.UI.Automation.Peers;
 using Telerik.UI.Xaml.Controls.Input.AutoCompleteBox;
 using Windows.Foundation;
 using Windows.System;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation;
 using Windows.UI.Xaml.Automation.Peers;
@@ -14,7 +13,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 
 namespace Telerik.UI.Xaml.Controls.Input
 {
@@ -124,7 +122,7 @@ namespace Telerik.UI.Xaml.Controls.Input
         /// Identifies the RadAutoCompleteBox.TextMatchHighlightStyle attached property.
         /// </summary>
         public static readonly DependencyProperty TextMatchHighlightStyleProperty =
-            DependencyProperty.RegisterAttached("TextMatchHighlightStyle", typeof(HighlightStyle), typeof(RadAutoCompleteBox), new PropertyMetadata(new HighlightStyle() { Foreground = new SolidColorBrush(Color.FromArgb(0xFF, 0x26, 0xA0, 0xDA)) }));
+            DependencyProperty.RegisterAttached("TextMatchHighlightStyle", typeof(HighlightStyle), typeof(RadAutoCompleteBox), new PropertyMetadata(new HighlightStyle()));
 
         /// <summary>
         /// Identifies the RadAutoCompleteBox.IsTextMatchHighlightEnabled attached property.
@@ -784,7 +782,7 @@ namespace Telerik.UI.Xaml.Controls.Input
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if the clear button should be visualized.
+        /// Gets or sets a value indicating whether if the clear button should be visualized.
         /// </summary>
         public bool IsClearButtonVisible
         {

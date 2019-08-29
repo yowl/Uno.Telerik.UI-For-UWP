@@ -9,7 +9,7 @@ namespace Telerik.UI.Xaml.Controls.Data
     /// <summary>
     /// Represents a BooleanEditor control.
     /// </summary>
-    public partial class BooleanEditor : CheckBox, ITypeEditor
+    public class BooleanEditor : CheckBox, ITypeEditor, IEditor
     {
         /// <summary>
         /// Identifies the <see cref="CheckedStateBackgroundBrush"/> dependency property. 
@@ -26,6 +26,26 @@ namespace Telerik.UI.Xaml.Controls.Data
         }
 
         /// <summary>
+        /// Gets or sets the Background of the rectangle area of the <see cref="CheckBox"/> when the control is checked.
+        /// </summary>
+        public Brush CheckedStateBackgroundBrush
+        {
+            get
+            {
+                return (Brush)GetValue(CheckedStateBackgroundBrushProperty);
+            }
+            set
+            {
+                this.SetValue(CheckedStateBackgroundBrushProperty, value);
+            }
+        }
+
+        object IEditor.GetCurrentValue()
+        {
+            return this.IsChecked;
+        }
+
+        /// <summary>
         /// Method used for generating bindings for the <see cref="ITypeEditor"/> properties.
         /// </summary>
         public void BindEditor()
@@ -38,21 +58,6 @@ namespace Telerik.UI.Xaml.Controls.Data
             b3.Converter = new IsEnabledEditorConvetrer();
             b3.Path = new PropertyPath(string.Empty);
             this.SetBinding(BooleanEditor.IsEnabledProperty, b3);
-        }
-
-        /// <summary>
-        /// Gets or sets the Background of the rectangle area of the <see cref="CheckBox"/> when the control is checked.
-        /// </summary>
-        public Brush CheckedStateBackgroundBrush
-        {
-            get
-            {
-                return (Brush)GetValue(CheckedStateBackgroundBrushProperty);
-            }
-            set
-            {
-                SetValue(CheckedStateBackgroundBrushProperty, value);
-            }
         }
     }
 }

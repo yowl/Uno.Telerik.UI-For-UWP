@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Globalization;
 using Telerik.UI.Xaml.Controls.Grid.Primitives;
 using Telerik.UI.Xaml.Controls.Primitives;
@@ -21,12 +20,12 @@ namespace Telerik.UI.Xaml.Controls.Grid
             DependencyProperty.Register(nameof(CellContentFormat), typeof(string), typeof(DataGridTextColumn), new PropertyMetadata(null, OnCellContentFormatChanged));
 
         internal static Type TextBlockType = typeof(TextBlock);
-        private static Style defaultTextCellStyle;
-        private static Style defaultCellEditorStyle;
-        private static Style defaultCellFlyoutContentStyle;
 
         private static Type textBoxType = typeof(TextBox);
 
+        private Style defaultTextCellStyle;
+        private Style defaultCellEditorStyle;
+        private Style defaultCellFlyoutContentStyle;
         private string cellContentFormatCache;
 
         /// <summary>
@@ -48,14 +47,14 @@ namespace Telerik.UI.Xaml.Controls.Grid
         {
             get
             {
-                if (defaultCellEditorStyle == null)
+                if (this.defaultCellEditorStyle == null)
                 {
-                    defaultCellEditorStyle = /* UNO TODO */Controls.Primitives.ResourceHelper.LoadEmbeddedResource(
+                    this.defaultCellEditorStyle = ResourceHelper.LoadEmbeddedResource(
                         typeof(DataGridTextColumn),
                         "Telerik.UI.Xaml.Controls.Grid.View.Columns.Resources.DefaultTextColumnEditorStyle.xaml",
                         "DefaultColumnEditorStyle") as Style;
                 }
-                return defaultCellEditorStyle;
+                return this.defaultCellEditorStyle;
             }
         }
 
@@ -63,30 +62,30 @@ namespace Telerik.UI.Xaml.Controls.Grid
         {
             get
             {
-				if (defaultTextCellStyle == null)
-				{
-					defaultTextCellStyle = /* UNO TODO */Controls.Primitives.ResourceHelper.LoadEmbeddedResource(
-						typeof(DataGridTextColumn),
-						"Telerik.UI.Xaml.Controls.Grid.View.Columns.Resources.DefaultTextColumnStyle.xaml",
-						"DefaultColumnStyle") as Style;
-				}
-				return defaultTextCellStyle;
-			}
-		}
+                if (this.defaultTextCellStyle == null)
+                {
+                    this.defaultTextCellStyle = ResourceHelper.LoadEmbeddedResource(
+                        typeof(DataGridTextColumn),
+                        "Telerik.UI.Xaml.Controls.Grid.View.Columns.Resources.DefaultTextColumnStyle.xaml",
+                        "DefaultColumnStyle") as Style;
+                }
+                return this.defaultTextCellStyle;
+            }
+        }
 
         internal override Style DefaultCellFlyoutContentStyle
         {
             get
             {
-				if (defaultCellFlyoutContentStyle == null)
-				{
-					defaultCellFlyoutContentStyle = /* UNO TODO */Controls.Primitives.ResourceHelper.LoadEmbeddedResource(
-						typeof(DataGridTextColumn),
-						"Telerik.UI.Xaml.Controls.Grid.View.Columns.Resources.DefaultTextColumnFlyoutContentStyle.xaml",
-						"DefaultColumnFlyoutStyle") as Style;
-				}
-				return defaultCellFlyoutContentStyle;
-			}
+                if (this.defaultCellFlyoutContentStyle == null)
+                {
+                    this.defaultCellFlyoutContentStyle = ResourceHelper.LoadEmbeddedResource(
+                        typeof(DataGridTextColumn),
+                        "Telerik.UI.Xaml.Controls.Grid.View.Columns.Resources.DefaultTextColumnFlyoutContentStyle.xaml",
+                        "DefaultColumnFlyoutStyle") as Style;
+                }
+                return this.defaultCellFlyoutContentStyle;
+            }
         }
 
         internal override bool CanEdit
@@ -97,67 +96,38 @@ namespace Telerik.UI.Xaml.Controls.Grid
             }
         }
 
-        internal override object GetEditorType(object item)
+        /// <summary>
+        /// Gets the type of the editor for the DataGridTextColumn that is visualized when entering in edit mode.
+        /// </summary>
+        /// <returns>The type of the editor.</returns>
+        public override object GetEditorType(object item)
         {
             return this.CanEdit ? textBoxType : TextBlockType;
         }
 
-        internal override object GetContainerType(object rowItem)
+        /// <summary>
+        /// Gets the type of the control visualized when the text column is not currently edited.
+        /// </summary>
+        /// <returns>The type of the control.</returns>
+        public override object GetContainerType(object rowItem)
         {
             return TextBlockType;
         }
 
-        internal override void PrepareCell(GridCellModel cell)
-        {
-            Debug.WriteLine("DataGridTextColumn.PrepareCell");
-            try
-            {
-                base.PrepareCell(cell);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-            }
-            Debug.WriteLine("DataGridTextColumn.PrepareCell base called");
-
-            TextBlock tb = cell.Container as TextBlock;
-            if (tb == null)
-            {
-            Debug.WriteLine("DataGridTextColumn.PrepareCell tb == null");
-                return;
-            }
-
-            if (cell.Value == null)
-            {
-            Debug.WriteLine("DataGridTextColumn.PrepareCell cell.Value == null");
-                tb.ClearValue(TextBlock.TextProperty);
-                return;
-            }
-
-            string text;
-            if (!string.IsNullOrEmpty(this.cellContentFormatCache))
-            {
-                text = string.Format(CultureInfo.CurrentUICulture, this.cellContentFormatCache, cell.Value);
-            }
-            else
-            {
-                text = Convert.ToString(cell.Value, CultureInfo.CurrentUICulture);
-            }
-
-            Debug.WriteLine($"DataGridTextColumn.PrepareCell is  text changed {text}");
-            if (tb.Text != text)
-            {
-                Debug.WriteLine($"DataGridTextColumn.PrepareCell changing text {text}");
-                tb.Text = text;
-            }
-        }
-
-        internal override object CreateContainer(object rowItem)
+        /// <summary>
+        /// Creates an instance of a TextBlock visualized when the column is not edited.
+        /// </summary>
+        /// <returns>An instance of the control.</returns>
+        public override object CreateContainer(object rowItem)
         {
             return new TextBlock();
         }
 
-        internal override FrameworkElement CreateEditorContentVisual()
+        /// <summary>
+        /// Creates an instance of a TextBox used by the column when entering edit mode.
+        /// </summary>
+        /// <returns>An instance of the editor.</returns>
+        public override FrameworkElement CreateEditorContentVisual()
         {
             TextBox textbox = new TextBox();
             textbox.TextChanged += this.Textbox_TextChanged;
@@ -165,14 +135,56 @@ namespace Telerik.UI.Xaml.Controls.Grid
             return textbox;
         }
 
-        internal override void PrepareEditorContentVisual(FrameworkElement editorContent, Binding binding)
+        /// <summary>
+        /// Prepares all bindings and content set to the TextBox visualized when entering edit mode.
+        /// </summary>
+        /// <param name="editorContent">The editor itself.</param>
+        /// <param name="binding">The binding set to the editor of the cell.</param>
+        public override void PrepareEditorContentVisual(FrameworkElement editorContent, Binding binding)
         {
             editorContent.SetBinding(TextBox.TextProperty, binding);
         }
 
-        internal override void ClearEditorContentVisual(FrameworkElement editorContent)
+        /// <summary>
+        /// Clears all bindings and content set to the TextBox visualized when entering edit mode.
+        /// </summary>
+        /// <param name="editorContent">The editor itself.</param>
+        public override void ClearEditorContentVisual(FrameworkElement editorContent)
         {
             editorContent.ClearValue(TextBox.TextProperty);
+        }
+
+        /// <inheritdoc/>
+        public override void PrepareCell(object container, object value, object item)
+        {
+            base.PrepareCell(container, value, item);
+
+            TextBlock tb = container as TextBlock;
+            if (tb == null)
+            {
+                return;
+            }
+
+            if (value == null)
+            {
+                tb.ClearValue(TextBlock.TextProperty);
+                return;
+            }
+
+            string text;
+            if (!string.IsNullOrEmpty(this.cellContentFormatCache))
+            {
+                text = string.Format(CultureInfo.CurrentUICulture, this.cellContentFormatCache, value);
+            }
+            else
+            {
+                text = Convert.ToString(value, CultureInfo.CurrentUICulture);
+            }
+
+            if (tb.Text != text)
+            {
+                tb.Text = text;
+            }
         }
 
         /// <summary>
@@ -191,7 +203,7 @@ namespace Telerik.UI.Xaml.Controls.Grid
             var column = d as DataGridTextColumn;
             column.cellContentFormatCache = (string)e.NewValue;
 
-            column.OnProperyChange(UpdateFlags.AllButData);
+            column.OnPropertyChange(UpdateFlags.AllButData);
         }
 
         private void Textbox_TextChanged(object sender, TextChangedEventArgs e)

@@ -13,11 +13,18 @@ namespace Telerik.Data.Core.Fields
     {
         private string name;
         private Type dataType;
+        private Type rootClassType;
         private CallSite<Func<CallSite, object, object>> callSite;
 
         public DynamicObjectFieldInfo(string name)
         {
             this.name = name;
+        }
+
+        public DynamicObjectFieldInfo(string name, Type rootClassType)
+        {
+            this.name = name;
+            this.rootClassType = rootClassType;
         }
 
         public string Name
@@ -47,6 +54,14 @@ namespace Telerik.Data.Core.Fields
             get
             {
                 return this.name;
+            }
+        }
+
+        public Type RootClassType
+        {
+            get
+            {
+                return this.rootClassType;
             }
         }
 

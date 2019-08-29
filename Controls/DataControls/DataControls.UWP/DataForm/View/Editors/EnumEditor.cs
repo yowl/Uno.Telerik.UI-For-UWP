@@ -8,7 +8,7 @@ namespace Telerik.UI.Xaml.Controls.Data
     /// <summary>
     /// Represents an EnumEditor control.
     /// </summary>
-    public partial class EnumEditor : ComboBox, ITypeEditor
+    public class EnumEditor : ComboBox, ITypeEditor, IEditor
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="EnumEditor"/> class.
@@ -17,7 +17,12 @@ namespace Telerik.UI.Xaml.Controls.Data
         {
             this.DefaultStyleKey = typeof(EnumEditor);
         }
-        
+
+        object IEditor.GetCurrentValue()
+        {
+            return this.SelectedItem;
+        }
+
         /// <summary>
         /// Method used for generating bindings for the <see cref="ITypeEditor"/> properties.
         /// </summary>
@@ -47,6 +52,12 @@ namespace Telerik.UI.Xaml.Controls.Data
 			this.SetBinding(EnumEditor.SelectedIndexProperty, b4);
 		}
 
+        /// <summary>
+        /// Creates or identifies the element that is used to display the given item.
+        /// </summary>
+        /// <returns>
+        /// The element that is used to display the given item.
+        /// </returns>
 		protected override DependencyObject GetContainerForItemOverride()
         {
             return new DataFormComboBoxItem();

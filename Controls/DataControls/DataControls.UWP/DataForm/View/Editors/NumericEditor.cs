@@ -9,7 +9,7 @@ namespace Telerik.UI.Xaml.Controls.Data
     /// <summary>
     /// Represents a NumericEditor control.
     /// </summary>
-    public partial class NumericEditor : RadNumericBox, ITypeEditor
+    public class NumericEditor : RadNumericBox, ITypeEditor, IEditor
     {
         /// <summary>
         /// Identifies the <see cref="ErrorIconStyle"/> dependency property. 
@@ -97,7 +97,7 @@ namespace Telerik.UI.Xaml.Controls.Data
         public Brush ButtonsBackground
         {
             get { return (Brush)GetValue(ButtonsBackgroundProperty); }
-            set { SetValue(ButtonsBackgroundProperty, value); }
+            set { this.SetValue(ButtonsBackgroundProperty, value); }
         }
 
         /// <summary>
@@ -106,7 +106,12 @@ namespace Telerik.UI.Xaml.Controls.Data
         public Brush ButtonsPointerOverBackgroundBrush
         {
             get { return (Brush)GetValue(ButtonsPointerOverBackgroundBrushProperty); }
-            set { SetValue(ButtonsPointerOverBackgroundBrushProperty, value); }
+            set { this.SetValue(ButtonsPointerOverBackgroundBrushProperty, value); }
+        }
+
+        object IEditor.GetCurrentValue()
+        {
+            return this.Value;
         }
 
         /// <summary>
@@ -135,10 +140,12 @@ namespace Telerik.UI.Xaml.Controls.Data
 
             Binding rangeB = new Binding();
             rangeB.Path = new PropertyPath("Range.Min");
+            rangeB.FallbackValue = double.MinValue;
             this.SetBinding(NumericEditor.MinimumProperty, rangeB);
 
             rangeB = new Binding();
             rangeB.Path = new PropertyPath("Range.Max");
+            rangeB.FallbackValue = double.MaxValue;
             this.SetBinding(NumericEditor.MaximumProperty, rangeB);
         }
     }

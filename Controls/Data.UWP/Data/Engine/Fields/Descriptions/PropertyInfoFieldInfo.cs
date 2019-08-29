@@ -9,6 +9,8 @@ namespace Telerik.Data.Core.Fields
     /// </summary>
     internal class PropertyInfoFieldInfo : IDataFieldInfo, IMemberAccess
     {
+        private readonly string nestedPropertyName;
+        private readonly Type rootClassType;
         private Action<object, object> propertySetter;
         private Func<object, object> propertyAccess;
         private PropertyInfo propertyInfo;
@@ -23,7 +25,6 @@ namespace Telerik.Data.Core.Fields
             {
                 throw new ArgumentNullException(nameof(propertyInfo));
             }
-
             this.propertyInfo = propertyInfo;
         }
 
@@ -41,8 +42,19 @@ namespace Telerik.Data.Core.Fields
             }
 
             this.propertyAccess = propertyAccess;
-
             this.propertySetter = propertySetter;
+        }
+
+        internal PropertyInfoFieldInfo(PropertyInfo propertyInfo, Func<object, object> propertyAccess, Action<object, object> propertySetter, Type rootClassType)
+           : this(propertyInfo, propertyAccess, propertySetter)
+        {
+            this.rootClassType = rootClassType;
+        }
+
+        internal PropertyInfoFieldInfo(PropertyInfo propertyInfo, Func<object, object> propertyAccess, Action<object, object> propertySetter, Type rootClassType, string nestedPropertyName)
+          : this(propertyInfo, propertyAccess, propertySetter, rootClassType)
+        {
+            this.nestedPropertyName = nestedPropertyName;
         }
 
         internal PropertyInfoFieldInfo(PropertyInfo propertyInfo, Func<object, object> propertyAccess)
@@ -69,12 +81,25 @@ namespace Telerik.Data.Core.Fields
             }
         }
 
+        public Type RootClassType
+        {
+            get
+            {
+                return this.rootClassType;
+            }
+        }
+
         /// <inheritdoc />
         public string Name
         {
             get
             {
-                return this.propertyInfo.Name;
+                if (string.IsNullOrEmpty(this.nestedPropertyName))
+                {
+                    return this.propertyInfo.Name;
+                }
+
+                return this.nestedPropertyName;
             }
         }
 

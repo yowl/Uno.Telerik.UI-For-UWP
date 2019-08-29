@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Windows.ApplicationModel;
@@ -72,14 +71,11 @@ namespace Telerik.Core
             {
                 getter = Expression.PropertyOrField(parameter, propertyPath);
             }
-
             var lambda = Expression.Lambda(getter, parameter);
             var compiled = lambda.Compile();
-
             var methodInfo = typeof(BindingExpressionHelper).GetTypeInfo()
-                                                            .GetDeclaredMethod("ToUntypedFunc")
-                                                            .MakeGenericMethod(new[] { itemType, lambda.Body.Type });
-
+                                                           .GetDeclaredMethod("ToUntypedFunc")
+                                                           .MakeGenericMethod(new[] { itemType, lambda.Body.Type });
             return (Func<object, object>)methodInfo.Invoke(null, new object[] { compiled });
 #endif
         }

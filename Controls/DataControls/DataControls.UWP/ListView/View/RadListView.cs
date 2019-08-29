@@ -30,7 +30,7 @@ namespace Telerik.UI.Xaml.Controls.Data
     public partial class RadListView : RadControl, IListView
     {
         /// <summary>
-        /// Identifies the <see cref="RealizedItemsBufferScale"/> dependency property. 
+        /// Identifies the <see cref="RealizedItemsBufferScale"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty RealizedItemsBufferScaleProperty =
             DependencyProperty.Register(nameof(RealizedItemsBufferScale), typeof(double), typeof(RadListView), new PropertyMetadata(1, OnRealizedItemsBufferScaleChanged));
@@ -170,7 +170,7 @@ namespace Telerik.UI.Xaml.Controls.Data
         internal ListViewPanel contentPanel;
         internal Panel childrenPanel;
         internal Panel animatingChildrenPanel;
-        internal UpdateServiceBase<UpdateFlags> updateService;
+        internal ListViewUpdateService updateService;
         internal ListViewAnimationService animationSurvice;
         internal ListViewLoadDataControl loadMoreDataControl;
         internal Panel frozenGroupHeadersHost;
@@ -509,7 +509,7 @@ namespace Telerik.UI.Xaml.Controls.Data
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether a busy indicator will appear when the data from the source is being loaded. 
+        /// Gets or sets a value indicating whether a busy indicator will appear when the data from the source is being loaded.
         /// </summary>
         public bool IsBusyIndicatorEnabled
         {
@@ -524,7 +524,7 @@ namespace Telerik.UI.Xaml.Controls.Data
         }
 
         /// <summary>
-        /// Gets or sets the source used to generate the content of the control. 
+        /// Gets or sets the source used to generate the content of the control.
         /// </summary>
         public object ItemsSource
         {
@@ -664,11 +664,6 @@ namespace Telerik.UI.Xaml.Controls.Data
             }
         }
 
-        /// <summary>
-        /// Gets or sets if the listView should scroll to the current item on tap
-        /// </summary>
-        protected bool ScrollToCurrentItemOnTap { get; set; }
-
         internal ListViewDragBehavior DragBehavior
         {
             get
@@ -712,6 +707,11 @@ namespace Telerik.UI.Xaml.Controls.Data
                 return this.model;
             }
         }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether if the listView should scroll to the current item on tap.
+        /// </summary>
+        protected bool ScrollToCurrentItemOnTap { get; set; }
 
         private static bool ShouldExecuteOperationsSyncroniously
         {
@@ -781,27 +781,52 @@ namespace Telerik.UI.Xaml.Controls.Data
                 return;
             }
 
-            var action = (Action)(() =>
-            {
-                var info = this.model.FindItemInfo(item);
-
-                if (info != null)
-                {
-                    var scrollOperation = new ScrollIntoViewOperation<ItemInfo?>(info, this.ScrollOffset) { CompletedAction = scrollCompletedAction };
-                    this.Model.ScrollIndexIntoViewCore(scrollOperation);
-                }
-            });
-
-            this.updateService.RegisterUpdate(new DelegateUpdate<UpdateFlags>(action));
+            var info = this.model.FindItemInfo(item);
+            this.RegisterScrollUpdate(info, scrollCompletedAction);
         }
-        
+
+        /// <summary>
+        /// Attempts to bring the specified index into view asynchronously.
+        /// </summary>
+        /// <param name="index">The index to scroll to.</param>
+        public void ScrollIndexIntoView(int index)
+        {
+            this.ScrollIndexIntoView(index, null);
+        }
+
+        /// <summary>
+        /// Attempts to bring the specified index into view asynchronously.
+        /// </summary>
+        /// <param name="index">The index to scroll to.</param>
+        /// <param name="scrollCompletedAction">Arbitrary action that may be executed after the asynchronous update is executed.</param>
+        public void ScrollIndexIntoView(int index, Action scrollCompletedAction)
+        {
+            if (!this.IsTemplateApplied || !this.itemsMeasured)
+            {
+                this.updateService.RegisterUpdate(new DelegateUpdate<UpdateFlags>(() => this.ScrollIndexIntoView(index, scrollCompletedAction)));
+                return;
+            }
+
+            int actualIndex = index;
+            if (this.GroupDescriptors.Count == 0)
+            {
+                actualIndex = this.model.layoutController.strategy.GetElementFlatIndex(actualIndex);
+            }
+
+            var info = this.model.FindDataItemFromIndex(actualIndex);
+            this.RegisterScrollUpdate(info, scrollCompletedAction);
+        }
+
         /// <summary>
         /// Invalidates the measure of the <see cref="RadListView"/> content panel.
         /// </summary>
         public void RebuildUI()
         {
             this.ResetActionContent();
-            this.contentPanel.InvalidateMeasure();
+            if (this.contentPanel != null)
+            {
+                this.contentPanel.InvalidateMeasure();
+            }
         }
 
         /// <inheritdoc/>
@@ -1037,14 +1062,33 @@ namespace Telerik.UI.Xaml.Controls.Data
             this.isActionContentDisplayed = false;
         }
 
-        internal void OnGroupIsExpandedChanged()
+        internal void OnGroupIsExpandedChanged(GroupHeaderContext context)
         {
+            var layout = this.model.layoutController.Layout;
+
+            if (context.IsExpanded)
+            {
+                layout.Expand(context.Group);
+            }
+            else
+            {
+                layout.Collapse(context.Group);
+            }
+
+            this.updateService.RegisterUpdate((int)UpdateFlags.AllButData);
         }
 
-        internal void OnGroupHeaderTap(ListViewGroupHeader header)
+        /// <summary>
+        /// Throws the command when group header gets tapped.
+        /// </summary>
+        /// <param name="header">The tapped header.</param>
+        protected internal virtual void OnGroupHeaderTap(ListViewGroupHeader header)
         {
             var context = header.DataContext as GroupHeaderContext;
             context.IsExpanded = header.IsExpanded;
+
+            this.commandService.ExecuteCommand(CommandId.GroupHeaderTap, context);
+
             header.IsExpanded = context.IsExpanded;
         }
 
@@ -1063,7 +1107,7 @@ namespace Telerik.UI.Xaml.Controls.Data
         {
             return new ListViewGroupHeader();
         }
-        
+
         /// <summary>
         /// Prepare the <see cref="ListViewLoadDataControl"/>.
         /// </summary>
@@ -1564,6 +1608,20 @@ namespace Telerik.UI.Xaml.Controls.Data
             }
         }
 
+        private void RegisterScrollUpdate(ItemInfo? info, Action scrollCompletedAction)
+        {
+            var action = (Action)(() =>
+            {
+                if (info != null)
+                {
+                    var scrollOperation = new ScrollIntoViewOperation<ItemInfo?>(info, this.ScrollOffset) { CompletedAction = scrollCompletedAction };
+                    this.Model.ScrollIndexIntoViewCore(scrollOperation);
+                }
+            });
+
+            this.updateService.RegisterUpdate(new DelegateUpdate<UpdateFlags>(action));
+        }
+
         private void AddLayer(ListViewLayer layer, Panel parent)
         {
             layer.DetachUI(layer.VisualElement as Panel);
@@ -1586,14 +1644,7 @@ namespace Telerik.UI.Xaml.Controls.Data
                 this.headerFooterLayerCache = new HeaderFooterListViewLayer();
             }
 
-            if (this.Orientation == Orientation.Vertical)
-            {
-                this.AddLayer(this.headerFooterLayerCache, this.childrenPanel);
-            }
-            else
-            {
-                this.AddLayer(this.headerFooterLayerCache, this.listViewRootPanel);
-            }
+            this.AddLayer(this.headerFooterLayerCache, this.childrenPanel);
 
             if (this.emptyContentLayerCahce == null)
             {
