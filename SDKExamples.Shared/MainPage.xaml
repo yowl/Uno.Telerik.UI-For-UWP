@@ -4,6 +4,7 @@
 	  xmlns:local="using:SDKExamples"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:mux="using:Windows.UI.Xaml.Controls"
+	  xmlns:grid="clr-namespace:Telerik.UI.Xaml.Controls.Grid;assembly=Telerik.Grid"
 	  mc:Ignorable="">
 
 	<Page.Resources>
@@ -28,47 +29,24 @@
 		</ResourceDictionary>
 	</Page.Resources>
 
-	<!-- UnoPlatformShell -->
-	<local:UnoPlatformShell x:Name="UnoShell"
-							AppName="UWPControl"
-							AppAuthor="Telerik"
-							LinkToOriginalApp="https://github.com/telerik/UI-For-UWP"
-							LinkToAppAuthor="https://github.com/telerik"
-							LinkToUnoPlatformApp="https://github.com/nventive/Uno.Telerik.UI-For-UWP"
-							VersionNumber="buildVersion">
-
-		<!-- About Content -->
-		<local:UnoPlatformShell.AboutContent>
-			<StackPanel>
-
-				<!-- About Content Line 1 -->
-				<TextBlock TextWrapping="Wrap"
-						   Foreground="{StaticResource Color02Brush}"
-						   FontStyle="Italic"
-						   FontSize="14">
-						
-					This application is running 
-					<Bold>
-						entirely locally
-					</Bold> 
-					on your machine, no data is being sent out to the wire.
-				</TextBlock>
-			</StackPanel>
-		</local:UnoPlatformShell.AboutContent>
-
 		<!-- App Content -->
-		<local:UnoPlatformShell.AppContent>
-
-			<mux:NavigationView x:Name="NavigationViewControl"
-								ItemInvoked="OnNavigationViewItemInvoked"
-								AlwaysShowHeader="False"
-								IsSettingsVisible="False"
-								IsTabStop="False"
-								Canvas.ZIndex="0">
-
-				<!-- rootFrame -->
-				<Frame x:Name="rootFrame" />
-			</mux:NavigationView>
-		</local:UnoPlatformShell.AppContent>
-	</local:UnoPlatformShell>
+    <grid:RadDataGrid AutoGenerateColumns="False">
+        <grid:RadDataGrid.Columns>
+            <grid:DataGridTextColumn Header="text"/>
+                                      </grid:RadDataGrid.Columns>
+    </grid:RadDataGrid>
+		<!-- <local:UnoPlatformShell.AppContent> -->
+  <!-- -->
+  <!--           <mux:NavigationView x:Name="NavigationViewControl" -->
+  <!--                               ItemInvoked="OnNavigationViewItemInvoked" -->
+  <!--                               AlwaysShowHeader="False" -->
+  <!--                               IsSettingsVisible="False" -->
+  <!--                               IsTabStop="False" -->
+  <!--                               Canvas.ZIndex="0"> -->
+  <!-- -->
+  <!--               ~1~ rootFrame @1@ -->
+  <!--               <Frame x:Name="rootFrame" /> -->
+  <!--           </mux:NavigationView> -->
+  <!-- -->
+		<!-- </local:UnoPlatformShell.AppContent> -->
 </Page>

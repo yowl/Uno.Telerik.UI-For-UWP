@@ -30,16 +30,16 @@ namespace SDKExamples.UWP
 		private ControlData[] _controls;
 		private Example[] _examples;
 
-		public Windows.UI.Xaml.Controls.NavigationView NavigationView
-		{
-			get { return NavigationViewControl; }
-		}
-
+//		public Windows.UI.Xaml.Controls.NavigationView NavigationView
+//		{
+//			get { return NavigationViewControl; }
+//		}
+//
 		public MainPage()
 		{
 			this.InitializeComponent();
 
-			MainPage.RootFrame = rootFrame;
+//			MainPage.RootFrame = rootFrame;
 
 #if !NETFX_CORE
 			this.TopAppBar = new CommandBar();
@@ -52,18 +52,18 @@ namespace SDKExamples.UWP
 			}
 
 #if __WASM__
-			switch (Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_MONO_RUNTIME_MODE"))
-			{
-				case "Interpreter":
-					UnoShell.AppEnvironmentMode = "Interpreted";
-					break;
-				case "FullAOT":
-					UnoShell.AppEnvironmentMode = "AOT";
-					break;
-				case "InterpreterAndAOT":
-					UnoShell.AppEnvironmentMode = "Mixed";
-					break;
-			}
+//			switch (Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_MONO_RUNTIME_MODE"))
+//			{
+//				case "Interpreter":
+//					UnoShell.AppEnvironmentMode = "Interpreted";
+//					break;
+//				case "FullAOT":
+//					UnoShell.AppEnvironmentMode = "AOT";
+//					break;
+//				case "InterpreterAndAOT":
+//					UnoShell.AppEnvironmentMode = "Mixed";
+//					break;
+//			}
 #endif
 		}
 
@@ -111,7 +111,7 @@ namespace SDKExamples.UWP
 					Glyph = controlData.Name[0].ToString() + controlData.Name[1].ToString()
 				};
 
-				NavigationViewControl.MenuItems.Add(item);
+//				NavigationViewControl.MenuItems.Add(item);
 			}
 		}
 
@@ -145,7 +145,7 @@ namespace SDKExamples.UWP
 				}
 			}
 
-			rootFrame.Navigate(typeof(SectionPage), _examples);
+//			rootFrame.Navigate(typeof(SectionPage), _examples);
 		}
 	}
 }
