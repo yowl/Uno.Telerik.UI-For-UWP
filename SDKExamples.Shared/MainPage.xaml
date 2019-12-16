@@ -30,9 +30,9 @@
 	</Page.Resources>
 
 		<!-- App Content -->
-    <grid:RadDataGrid AutoGenerateColumns="False">
+    <grid:RadDataGrid AutoGenerateColumns="False" ItemsSource="{x:Bind Source}">
         <grid:RadDataGrid.Columns>
-            <grid:DataGridTextColumn Header="text"/>
+            <grid:DataGridTextColumn Header="text" PropertyName="A"/>
                                       </grid:RadDataGrid.Columns>
     </grid:RadDataGrid>
 		<!-- <local:UnoPlatformShell.AppContent> -->

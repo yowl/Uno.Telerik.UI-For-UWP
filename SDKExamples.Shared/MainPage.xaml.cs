@@ -46,11 +46,11 @@ namespace SDKExamples.UWP
 			this.Padding = new Thickness(0, 55, 0, 0);
 #endif
 
-			if (MainPage.Source == null)
-			{
-				this.LoadData();
-			}
-
+            Source = new List<GridItem>
+            {
+                new GridItem("a"),
+                new GridItem("b"),
+            };
 #if __WASM__
 //			switch (Environment.GetEnvironmentVariable("UNO_BOOTSTRAP_MONO_RUNTIME_MODE"))
 //			{
@@ -65,9 +65,20 @@ namespace SDKExamples.UWP
 //					break;
 //			}
 #endif
-		}
+        }
 
-		public static IEnumerable Source { get; set; }
+        public class GridItem
+        {
+            public GridItem(string v)
+            {
+                A = v;
+            }
+
+            public string A { get; }
+        }
+
+
+		public IEnumerable Source { get; set; }
 
 		private async void LoadData()
 		{
@@ -129,7 +140,7 @@ namespace SDKExamples.UWP
 
 		private void BackButtonClicked(object sender, RoutedEventArgs e)
 		{
-			this.DataContext = MainPage.Source;
+//			this.DataContext = MainPage.Source;
 		}
 
 		private void OnNavigationViewItemInvoked(Windows.UI.Xaml.Controls.NavigationView sender, Windows.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
