@@ -12,18 +12,23 @@ jobs:
     inputs:
       updateAssemblyInfo: false
 
-  - task: NuGetToolInstaller@0
+  - task: UseDotNet@2
+    displayName: 'Use .Net Core runtime 2.2.x'
     inputs:
-      versionSpec: 4.9.1
-      checkLatest: false
+      packageType: runtime
+      version: 2.2.x
+      installationPath: '$(DotnetRuntimePath)'
 
-  - task: NuGetCommand@2
+  - task: nventiveCanaryUpdater@5
+    displayName: 'Canary Update'
+    condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/canaries')
     inputs:
-      command: restore
       solution: Controls/UWPControls.sln
-      selectOrConfig: select
-      includeNuGetOrg: true
-      verbosityRestore: Normal
+      branchToMerge: uno
+      summaryFile: '$(Build.ArtifactStagingDirectory)/Canary.md'
+      resultFile: '$(Build.ArtifactStagingDirectory)/result.json'
+      nugetUpdaterVersion: 2.0.6
+      packageAuthor: nventive
 
   - task: MSBuild@1
     inputs:
@@ -31,7 +36,7 @@ jobs:
       msbuildLocationMethod: version
       msbuildVersion: latest
       msbuildArchitecture: x86
-      msbuildArguments: /p:Configuration=Release "/p:Platform=Any CPU" /detailedsummary "/p:PackageVersion=$(GITVERSION.FullSemVer)" "/p:InformationalVersion=$(GITVERSION.InformationalVersion)" "/p:PackageOutputPath=$(build.artifactstagingdirectory)"
+      msbuildArguments: /r /p:Configuration=Release "/p:Platform=Any CPU" /detailedsummary "/p:PackageVersion=$(GITVERSION.FullSemVer)" "/p:InformationalVersion=$(GITVERSION.InformationalVersion)" "/p:PackageOutputPath=$(build.artifactstagingdirectory)" # /bl:$(build.artifactstagingdirectory)\build-$(GitVersion.FullSemVer).binlog
       clean: false
       maximumCpuCount: true
       restoreNugetPackages: false
@@ -57,6 +62,7 @@ jobs:
       TargetFolder: $(build.artifactstagingdirectory)\wasm
 
   - task: PublishBuildArtifacts@1
+    condition: always()
     inputs:
       PathtoPublish: $(build.artifactstagingdirectory)
       ArtifactName: TelerikUWP-drop

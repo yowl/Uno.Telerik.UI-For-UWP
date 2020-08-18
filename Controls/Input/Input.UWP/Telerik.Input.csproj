@@ -5,15 +5,12 @@
     <DefaultLanguage>en-US</DefaultLanguage>
     <NoWarn>$(NoWarn);1998;Uno0001</NoWarn>
     <GeneratePackageOnBuild Condition="'$(Configuration)'=='Release'">true</GeneratePackageOnBuild>
+    <AssemblyName>Telerik.UI.Xaml.Input.UWP</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Uno.UI" Version="2.1.0-dev.281" />
+    <PackageReference Include="Uno.UI" Version="3.0.0-dev.1262" />
   </ItemGroup>
-	
-	<PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
-		<DefineConstants>__WASM__</DefineConstants>
-	</PropertyGroup>
 
 	<ItemGroup>
 		<Page Include="Themes\Generic.xaml" />
