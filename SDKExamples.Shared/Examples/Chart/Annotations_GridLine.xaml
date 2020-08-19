@@ -53,35 +53,6 @@
                 <TextBlock Text="CartesianGridLineAnnotation" FontSize="20"/>
                 <ListViewItem.DataContext>
                     <DataTemplate>
-                        <chart:RadCartesianChart x:Name="cartesianChart">
-
-                            <chart:RadCartesianChart.Annotations>
-                                <chart:CartesianGridLineAnnotation Axis="{Binding ElementName=cartesianChart, Path=HorizontalAxis}" 
-                                        Value="2.8" Stroke="Blue" StrokeThickness="1"/>
-                                <chart:CartesianGridLineAnnotation Axis="{Binding ElementName=cartesianChart, Path=VerticalAxis}" 
-                                        Value="6" Stroke="Red" StrokeThickness="1"/>
-                            </chart:RadCartesianChart.Annotations>
-
-                            <chart:RadCartesianChart.HorizontalAxis>
-                                <chart:LinearAxis />
-                            </chart:RadCartesianChart.HorizontalAxis>
-                            <chart:RadCartesianChart.VerticalAxis>
-                                <chart:LinearAxis/>
-                            </chart:RadCartesianChart.VerticalAxis>
-
-                            <chart:ScatterPointSeries  localChart:SeriesAnimationsHelper.AllowSlideAnimationOnStart="True">
-                                <chart:ScatterPointSeries.DataPoints>
-                                    <charting:ScatterDataPoint XValue="1" YValue="1" />
-                                    <charting:ScatterDataPoint XValue="5" YValue="3" />
-                                    <charting:ScatterDataPoint XValue="8" YValue="11" />
-                                </chart:ScatterPointSeries.DataPoints>
-                            </chart:ScatterPointSeries>
-
-                            <chart:RadCartesianChart.Grid>
-                                <chart:CartesianChartGrid MajorLinesVisibility="XY" />
-                            </chart:RadCartesianChart.Grid>
-
-                        </chart:RadCartesianChart>
                     </DataTemplate>
                 </ListViewItem.DataContext>
             </ListViewItem>
@@ -90,35 +61,6 @@
                 <TextBlock Text="PolarAxisGridLineAnnotation" FontSize="20"/>
                 <ListViewItem.DataContext>
                     <DataTemplate>
-                        <chart:RadPolarChart>
-
-                            <chart:RadPolarChart.Annotations>
-                                <chart:PolarAxisGridLineAnnotation Value="2" Stroke="Red"/>
-                                <chart:PolarAxisGridLineAnnotation Value="7" Stroke="LightGreen"/>
-                                <chart:PolarAxisGridLineAnnotation Value="8" Stroke="LightBlue"/>
-                            </chart:RadPolarChart.Annotations>
-
-                            <chart:RadPolarChart.RadialAxis>
-                                <chart:NumericalRadialAxis/>
-                            </chart:RadPolarChart.RadialAxis>
-
-                            <chart:RadPolarChart.PolarAxis>
-                                <chart:PolarAxis/>
-                            </chart:RadPolarChart.PolarAxis>
-
-                            <chart:PolarPointSeries>
-                                <chart:PolarPointSeries.DataPoints>
-                                    <charting:PolarDataPoint Value="1" Angle="15" />
-                                    <charting:PolarDataPoint Value="5" Angle="200" />
-                                    <charting:PolarDataPoint Value="11" Angle="300" />
-                                </chart:PolarPointSeries.DataPoints>
-                            </chart:PolarPointSeries>
-
-                            <chart:RadPolarChart.Grid>
-                                <chart:PolarChartGrid GridLineVisibility="Both" />
-                            </chart:RadPolarChart.Grid>
-
-                        </chart:RadPolarChart>
                     </DataTemplate>
                 </ListViewItem.DataContext>
             </ListViewItem>

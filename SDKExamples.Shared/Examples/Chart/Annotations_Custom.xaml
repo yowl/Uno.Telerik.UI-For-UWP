@@ -53,43 +53,6 @@
                 <TextBlock Text="CartesianCustomAnnotation" FontSize="20"/>
                 <ListViewItem.DataContext>
                     <DataTemplate>
-                        <chart:RadCartesianChart x:Name="cartesianChart">
-
-                            <chart:RadCartesianChart.Annotations>
-                                <chart:CartesianCustomAnnotation HorizontalValue="2" VerticalValue="2" Content="Custom content" />
-                                <chart:CartesianCustomAnnotation HorizontalValue="5" VerticalValue="7" 
-                                                HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <chart:CartesianCustomAnnotation.ContentTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock Text="Test location"/>
-                                                <Rectangle Width="100" Height="100" Fill="#99669966" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </chart:CartesianCustomAnnotation.ContentTemplate>
-                                </chart:CartesianCustomAnnotation>
-                            </chart:RadCartesianChart.Annotations>
-
-                            <chart:RadCartesianChart.HorizontalAxis>
-                                <chart:LinearAxis />
-                            </chart:RadCartesianChart.HorizontalAxis>
-                            <chart:RadCartesianChart.VerticalAxis>
-                                <chart:LinearAxis/>
-                            </chart:RadCartesianChart.VerticalAxis>
-
-                            <chart:ScatterPointSeries localChart:SeriesAnimationsHelper.AllowSlideAnimationOnStart="True">
-                                <chart:ScatterPointSeries.DataPoints>
-                                    <charting:ScatterDataPoint XValue="1" YValue="1" />
-                                    <charting:ScatterDataPoint XValue="5" YValue="3" />
-                                    <charting:ScatterDataPoint XValue="8" YValue="11" />
-                                </chart:ScatterPointSeries.DataPoints>
-                            </chart:ScatterPointSeries>
-
-                            <chart:RadCartesianChart.Grid>
-                                <chart:CartesianChartGrid MajorLinesVisibility="XY" />
-                            </chart:RadCartesianChart.Grid>
-
-                        </chart:RadCartesianChart>
                     </DataTemplate>
                 </ListViewItem.DataContext>
             </ListViewItem>
@@ -98,63 +61,6 @@
                 <TextBlock Text="PolarCustomAnnotation" FontSize="20"/>
                 <ListViewItem.DataContext>
                     <DataTemplate>
-                        <chart:RadPolarChart>
-
-                            <chart:RadPolarChart.Annotations>
-                                <chart:PolarCustomAnnotation PolarValue="3" RadialValue="70" Content="Custom content" />
-                                <chart:PolarCustomAnnotation PolarValue="10" RadialValue="180"
-                                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <chart:PolarCustomAnnotation.ContentTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock Text="Test location"/>
-                                                <Rectangle Width="70" Height="70" Fill="#99669966" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </chart:PolarCustomAnnotation.ContentTemplate>
-                                </chart:PolarCustomAnnotation>
-                                <chart:PolarCustomAnnotation PolarValue="8" RadialValue="300" 
-                                            HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <chart:PolarCustomAnnotation.Content>
-                                        <Path Stroke="Red" StrokeThickness="2">
-                                            <Path.Data>
-                                                <PathGeometry>
-													<PathGeometry.Figures>
-														<PathFigure StartPoint="0,0">
-															<LineSegment Point="20,30" />
-														</PathFigure>
-														<PathFigure StartPoint="0,30">
-															<LineSegment Point="20,0" />
-														</PathFigure>
-													</PathGeometry.Figures>
-												</PathGeometry>
-                                            </Path.Data>
-                                        </Path>
-                                    </chart:PolarCustomAnnotation.Content>
-                                </chart:PolarCustomAnnotation>
-                            </chart:RadPolarChart.Annotations>
-
-                            <chart:RadPolarChart.RadialAxis>
-                                <chart:NumericalRadialAxis/>
-                            </chart:RadPolarChart.RadialAxis>
-
-                            <chart:RadPolarChart.PolarAxis>
-                                <chart:PolarAxis/>
-                            </chart:RadPolarChart.PolarAxis>
-
-                            <chart:PolarPointSeries>
-                                <chart:PolarPointSeries.DataPoints>
-                                    <charting:PolarDataPoint Value="1" Angle="15" />
-                                    <charting:PolarDataPoint Value="5" Angle="200" />
-                                    <charting:PolarDataPoint Value="11" Angle="300" />
-                                </chart:PolarPointSeries.DataPoints>
-                            </chart:PolarPointSeries>
-
-                            <chart:RadPolarChart.Grid>
-                                <chart:PolarChartGrid GridLineVisibility="Both" />
-                            </chart:RadPolarChart.Grid>
-
-                        </chart:RadPolarChart>
                     </DataTemplate>
                 </ListViewItem.DataContext>
             </ListViewItem>
