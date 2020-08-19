@@ -8,7 +8,7 @@
         <ResourceDictionary>
             <telerik:UserThemeResources x:Key="ResourceLoaderInitializer"/>
         </ResourceDictionary>
-        <ResourceDictionary Source="Resources.xaml"/>
+        <ResourceDictionary Source="ms-appx:///Telerik.UI.Xaml.Grid.UWP/Themes/Resources.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
